@@ -3,6 +3,7 @@ import { Search, Sparkles } from 'lucide-react';
 import CTASection from './CTAsection';
 import TestimonialSection from './Testinomials';
 import JourneySection from './JourneySection';
+<<<<<<< HEAD
 import bgimg from "../assets/hero-ai-learning-ByJUC3BB.jpg"
 
 const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
@@ -12,6 +13,13 @@ const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
             {/* Overlay for low opacity background */}
             <div className="absolute inset-0 bg-white/70 dark:bg-black/60" style={{ zIndex: 1 }}></div>
             <div className="relative max-w-4xl mx-auto text-center" style={{ zIndex: 2 }}>
+=======
+import HowItWorks from './how-it-works';
+const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
+    return (
+        <section className="relative bg-blue-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl pb-8 mx-auto text-center">
+>>>>>>> 5f164bb691c2aa62e22c5a610f087a6c695e2fe4
                 <div className="flex items-center justify-center mb-4">
                     <Sparkles className="w-8 h-8 text-blue-500 mr-2" />
                     <span className="text-blue-600 font-medium">Next-Gen Education Platform</span>
@@ -76,8 +84,13 @@ const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </section>
             {/* Login Types */}
+=======
+             {/* Login Types */}
+             <HowItWorks/>
+>>>>>>> 5f164bb691c2aa62e22c5a610f087a6c695e2fe4
             <JourneySection/>
             <CTASection/>
             <TestimonialSection/>
