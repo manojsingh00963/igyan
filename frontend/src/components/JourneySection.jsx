@@ -26,7 +26,7 @@ export default function JourneySection() {
                 <li>• Skill badges & certifications</li>
                 <li>• Career guidance</li>
               </ul>
-              <button className="w-full mt-4 py-2 px-4 bg-primary text-white rounded hover:bg-primary/80 transition">Join as Student</button>
+              <button className="w-full mt-4 py-2 px-4 bg-primary text-black rounded hover:bg-primary/80 transition">Join as Student</button>
             </div>
           </div>
 
@@ -46,7 +46,7 @@ export default function JourneySection() {
                 <li>• Conduct mentor sessions</li>
                 <li>• Earn from teaching</li>
               </ul>
-              <button className="w-full mt-4 py-2 px-4 bg-accent text-white rounded hover:bg-accent/80 transition">Join as Teacher</button>
+              <button className="w-full mt-4 py-2 px-4 bg-accent text-black rounded hover:bg-accent/80 transition">Join as Teacher</button>
             </div>
           </div>
 
@@ -66,7 +66,7 @@ export default function JourneySection() {
                 <li>• Review portfolios</li>
                 <li>• AI-matched candidates</li>
               </ul>
-              <button className="w-full mt-4 py-2 px-4 bg-primary text-white rounded hover:bg-primary/80 transition">Join as Company</button>
+              <button className="w-full mt-4 py-2 px-4 bg-primary text-black rounded hover:bg-primary/80 transition">Join as Company</button>
             </div>
           </div>
         </div>
