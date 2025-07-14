@@ -3,10 +3,11 @@ import { Search, Sparkles } from 'lucide-react';
 import CTASection from './CTAsection';
 import TestimonialSection from './Testinomials';
 import JourneySection from './JourneySection';
+import HowItWorks from './how-it-works';
 const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
     return (
         <section className="relative bg-blue-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-4xl pb-8 mx-auto text-center">
                 <div className="flex items-center justify-center mb-4">
                     <Sparkles className="w-8 h-8 text-blue-500 mr-2" />
                     <span className="text-blue-600 font-medium">Next-Gen Education Platform</span>
@@ -72,6 +73,7 @@ const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
                 </div>
             </div>
              {/* Login Types */}
+             <HowItWorks/>
             <JourneySection/>
      
             <CTASection/>
