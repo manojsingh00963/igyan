@@ -1,5 +1,8 @@
 import React from 'react'
 import { Search, Sparkles } from 'lucide-react';
+import CTASection from './CTAsection';
+import TestimonialSection from './Testinomials';
+import JourneySection from './JourneySection';
 const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
     return (
         <section className="relative bg-blue-50 py-16 px-4 sm:px-6 lg:px-8">
@@ -68,6 +71,11 @@ const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
                     </div>
                 </div>
             </div>
+             {/* Login Types */}
+            <JourneySection/>
+     
+            <CTASection/>
+            <TestimonialSection/>
         </section>
     );
 };
