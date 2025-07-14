@@ -2,7 +2,7 @@ import React from 'react'
 import { Search, Sparkles } from 'lucide-react';
 const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
     return (
-        <section className="relative bg-blue-50 py-16 px-4 sm:px-6 lg:px-8">
+        <section className="relative bg-blue-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
                 <div className="flex items-center justify-center mb-4">
                     <Sparkles className="w-8 h-8 text-blue-500 mr-2" />
