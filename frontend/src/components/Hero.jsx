@@ -3,10 +3,15 @@ import { Search, Sparkles } from 'lucide-react';
 import CTASection from './CTAsection';
 import TestimonialSection from './Testinomials';
 import JourneySection from './JourneySection';
+import bgimg from "../assets/hero-ai-learning-ByJUC3BB.jpg"
+
 const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
     return (
-        <section className="relative bg-blue-50 py-16 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
+        <section className="relative bg-blue-50 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden" >
+        <section className="relative bg-blue-50 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden" style={{ backgroundImage: `url(${bgimg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            {/* Overlay for low opacity background */}
+            <div className="absolute inset-0 bg-white/70 dark:bg-black/60" style={{ zIndex: 1 }}></div>
+            <div className="relative max-w-4xl mx-auto text-center" style={{ zIndex: 2 }}>
                 <div className="flex items-center justify-center mb-4">
                     <Sparkles className="w-8 h-8 text-blue-500 mr-2" />
                     <span className="text-blue-600 font-medium">Next-Gen Education Platform</span>
@@ -71,9 +76,9 @@ const Hero = ({ chatInput, setChatInput, onChatSubmit, isLoggedIn }) => {
                     </div>
                 </div>
             </div>
-             {/* Login Types */}
+        </section>
+            {/* Login Types */}
             <JourneySection/>
-     
             <CTASection/>
             <TestimonialSection/>
         </section>
