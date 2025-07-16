@@ -27,7 +27,7 @@ const CTASection = () => {
       <div className="text-4xl mb-3">{icon}</div>
       <h3 className="text-xl font-semibold mb-1">{title}</h3>
       <p className="text-sm text-gray-600 dark:text-gray-300">{description}</p>
-      <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">Explore</button>
+      <button className="mt-4 px-4 py-2 cursor-pointer bg-blue-700 text-white rounded hover:bg-blue-600 transition">Explore</button>
     </div>
   );
   
