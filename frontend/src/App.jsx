@@ -8,6 +8,7 @@ import AIGuide from "./pages/AiGuide"
 import Contact from "./pages/Contact"
 import Companies from "./pages/Companies"
 import StudentProjects from "./pages/Projects"
+import CourseModulePage from "./pages/Courses"
 function App() {
 
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/companies" element={<Companies />} />
         <Route path="/project" element={<StudentProjects />} />
-
+        <Route path="/courses" element={<CourseModulePage/>}/>
       </Routes>
     </div>
   )

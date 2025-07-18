@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { Menu, X, User, Sun, Moon } from 'lucide-react';
 
 const navItems = [
-  { name: 'Explore Skills', path: '/skills' },
+  { name: 'Explore Skills', path: '/courses' },
   { name: 'Projects', path: '/projects' },
   { name: 'Mentors', path: '/mentors' },
-  { name: 'AiGuide', path: '/aiguide' },
+  { name: 'AIGuide', path: '/aiguide' },
   { name: 'Companies', path: '/companies' },
   { name: 'About', path: '/about' },
 ];
@@ -15,7 +15,7 @@ const Navbar = ({ isLoggedIn, isDarkMode, toggleTheme, onLoginClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinkClass =
-    'px-3 py-2 rounded-md text-base font-medium transition-colors text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400';
+    'px-3 py-2 rounded-md text-lg font-medium transition-colors text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400';
 
   const getActiveClass = ({ isActive }) =>
     isActive ? `${navLinkClass} underline underline-offset-4 text-blue-600 dark:text-blue-400` : navLinkClass;
@@ -27,7 +27,7 @@ const Navbar = ({ isLoggedIn, isDarkMode, toggleTheme, onLoginClick }) => {
           <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">I-GYAN</div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-4 ml-10">
+          <div className="hidden md:flex space-x-2 ml-10">
             {navItems.map(({ name, path }) => (
               <NavLink key={name} to={path} className={getActiveClass}>
                 {name}
