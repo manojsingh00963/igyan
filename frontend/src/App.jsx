@@ -1,28 +1,38 @@
-import { Routes } from "react-router-dom"
-import Navbar from "./components/Navbar"
-import { Route } from "react-router-dom"
-import Homepage from "./pages/Home"
-import Hero from "./components/Hero"
-import Mentor from "./pages/Mentors"
-import AIGuide from "./pages/AiGuide"
-import Contact from "./pages/Contact"
-import Companies from "./pages/Companies"
-import StudentProjects from "./pages/Projects"
+import { Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
+import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
+import LoginModal from "./components/LoginModal";
+import Homepage from "./pages/Home";
+import Mentor from "./pages/Mentors";
+import AIGuide from "./pages/AiGuide";
+import Contact from "./pages/Contact";
+import Companies from "./pages/Companies";
+import StudentProjects from "./pages/Projects";
+import Footer from "./components/Footer";
+import NotFound from "./pages/NotFound";
+
 function App() {
-
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/mentors" element={<Mentor />} />
-        <Route path="/aiguide" element={<AIGuide />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/companies" element={<Companies />} />
-        <Route path="/project" element={<StudentProjects />} />
-
-      </Routes>
-    </div>
-  )
+    <ThemeProvider>
+      <AuthProvider>
+        <div className="min-h-screen transition-colors duration-300 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+          <Navbar />
+          <LoginModal />
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/mentors" element={<Mentor />} />
+            <Route path="/aiguide" element={<AIGuide />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/companies" element={<Companies />} />
+            <Route path="/project" element={<StudentProjects />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </div>
+      </AuthProvider>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

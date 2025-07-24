@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, X, User, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 
 const navItems = [
   { name: 'Explore Skills', path: '/skills' },
@@ -11,8 +13,10 @@ const navItems = [
   { name: 'About', path: '/about' },
 ];
 
-const Navbar = ({ isLoggedIn, isDarkMode, toggleTheme, onLoginClick }) => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
+  const { isLoggedIn, setShowLogin } = useAuth();
 
   const navLinkClass =
     'px-3 py-2 rounded-md text-base font-medium transition-colors text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400';
@@ -46,7 +50,7 @@ const Navbar = ({ isLoggedIn, isDarkMode, toggleTheme, onLoginClick }) => {
 
             {!isLoggedIn ? (
               <button
-                onClick={onLoginClick}
+                onClick={() => setShowLogin(true)}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
               >
                 Login

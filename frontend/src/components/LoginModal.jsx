@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { X, BookOpen, Users, Building2 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
-const LoginModal = ({ showLogin, setShowLogin, onLogin }) => {
+const LoginModal = () => {
+  const { showLogin, setShowLogin, handleLogin } = useAuth();
   const [loginType, setLoginType] = useState('learner');
   const [isSignUp, setIsSignUp] = useState(false);
 
@@ -21,7 +23,6 @@ const LoginModal = ({ showLogin, setShowLogin, onLogin }) => {
             <X className="h-6 w-6" />
           </button>
         </div>
-
         {/* Login Selection */}
         <div className="mb-6">
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">I am a:</p>
@@ -61,7 +62,6 @@ const LoginModal = ({ showLogin, setShowLogin, onLogin }) => {
             </button>
           </div>
         </div>
-
         {/* Auth Form */}
         <div className="space-y-4">
           {isSignUp && (
@@ -113,13 +113,12 @@ const LoginModal = ({ showLogin, setShowLogin, onLogin }) => {
             </div>
           )}
           <button
-            onClick={onLogin}
+            onClick={handleLogin}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors"
           >
             {isSignUp ? 'Create Account & Continue' : 'Login & Continue'}
           </button>
         </div>
-
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600 dark:text-gray-400">
             {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
@@ -136,5 +135,4 @@ const LoginModal = ({ showLogin, setShowLogin, onLogin }) => {
   );
 };
 
-
-export default LoginModal
+export default LoginModal;
