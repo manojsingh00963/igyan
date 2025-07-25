@@ -1,59 +1,57 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  FaRobot,
-  FaUser,
-  FaPaperPlane,
-  FaLightbulb,
-  FaGraduationCap,
-  FaCode,
-  FaChartLine,
-  FaArrowLeft,
-  FaMicrophone,
-  FaPlay,
-  FaBookOpen,
-  FaRocket,
-  FaHeart,
-  FaStar,
-  FaDesktop,
-  FaUserTie
-} from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+  Bot, User, Send, Code,
+  ArrowLeft, Mic, Rocket, 
+  Moon, Sun, Menu, X, Gamepad2, Video, Brain, Monitor,
+  Smartphone, Cloud,
+  UserCog
+} from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const AIGuide = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
       type: 'ai',
-      content: "Hi there! 👋 I'm GYAN-AI, your personal learning and career guide. I'm here to help you discover your potential, plan your learning journey, and achieve your career goals. What would you like to explore today?",
+      content: "Hi there! 👋 I'm GYAN-AI, your personal learning companion powered by cutting-edge AI. I specialize in modern tech skills, career transitions, and personalized learning paths. Ready to unlock your potential?",
       timestamp: new Date(),
       suggestions: [
-        "Help me choose a career path 🎯",
-        "Create a learning roadmap 📚",
-        "Review my skills and suggest improvements 🚀",
-        "Find the right courses for me 📖"
+        "Show me AI/ML career paths 🤖",
+        "Create my coding bootcamp plan 💻",
+        "Trending skills in 2025 🔥",
+        "Remote work opportunities 🌐"
       ]
     }
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const messagesEndRef = useRef(null);
 
   const quickActions = [
-    { icon: FaGraduationCap, text: "Career Assessment", description: "Discover your ideal career path" },
-    { icon: FaBookOpen, text: "Learning Plan", description: "Get a personalized study roadmap" },
-    { icon: FaCode, text: "Skill Gap Analysis", description: "Identify areas for improvement" },
-    { icon: FaRocket, text: "Project Ideas", description: "Get project suggestions for your level" },
-    { icon: FaChartLine, text: "Market Insights", description: "Learn about industry trends" },
-    { icon: FaUserTie, text: "Interview Prep", description: "Practice for your dream job" }
+    { icon: Brain, text: "AI/ML Learning", description: "Master artificial intelligence", color: "bg-purple-600" },
+    { icon: Code, text: "Full-Stack Dev", description: "Frontend to backend mastery", color: "bg-blue-600" },
+    { icon: Monitor, text: "Data Science", description: "Analytics and visualization", color: "bg-green-600" },
+    { icon: Smartphone, text: "Mobile Dev", description: "iOS/Android applications", color: "bg-orange-600" },
+    { icon: Cloud, text: "Cloud Computing", description: "AWS, Azure, GCP expertise", color: "bg-indigo-600" },
+    { icon: Gamepad2, text: "Game Development", description: "Unity, Unreal Engine", color: "bg-pink-600" },
+    { icon: Video, text: "Content Creation", description: "YouTube, TikTok, Podcasts", color: "bg-yellow-600" },
+    { icon: UserCog, text: "Tech Leadership", description: "Management and strategy", color: "bg-gray-600" }
+  ];
+
+  const modernSkills = [
+    "ChatGPT & AI Tools", "React/Next.js", "Python Data Science", "Cloud Architecture",
+    "DevOps & CI/CD", "Blockchain", "Cybersecurity", "UI/UX Design"
   ];
 
   const aiResponses = [
-    "That's a great question! Let me help you with that. Based on your interests, I'd recommend starting with...",
-    "I understand you're looking for guidance. Here's what I suggest based on current market trends...",
-    "Excellent choice! This field has tremendous opportunities. Let me create a personalized roadmap for you...",
-    "I can see you're passionate about this area. Here are some specific steps you can take...",
-    "That's an exciting career path! Let me break down the skills you'll need and how to acquire them..."
+    "Excellent question! Based on 2025 market trends, I'd recommend focusing on AI integration skills. Here's your personalized roadmap...",
+    "Great choice! The demand for these skills has grown 300% this year. Let me create a step-by-step learning plan...",
+    "I love your enthusiasm! This field offers amazing remote opportunities. Here's what successful professionals are doing...",
+    "Perfect timing! Many companies are hiring for these roles. Let me show you the exact skills they're looking for...",
+    "That's a smart career move! I've helped 500+ students transition successfully. Here's your custom action plan..."
   ];
 
   const scrollToBottom = () => {
@@ -64,11 +62,18 @@ const AIGuide = () => {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
   const handleSendMessage = (message = null) => {
     const messageText = message || inputMessage.trim();
     if (!messageText) return;
 
-    // Add user message
     const userMessage = {
       id: Date.now(),
       type: 'user',
@@ -80,7 +85,6 @@ const AIGuide = () => {
     setInputMessage('');
     setIsTyping(true);
 
-    // Simulate AI response
     setTimeout(() => {
       const aiMessage = {
         id: Date.now() + 1,
@@ -88,15 +92,20 @@ const AIGuide = () => {
         content: aiResponses[Math.floor(Math.random() * aiResponses.length)],
         timestamp: new Date(),
         suggestions: [
-          "Tell me more about this 🤔",
-          "What are the prerequisites? 📋",
-          "Show me similar options 🔍",
-          "Create a timeline for me ⏰"
+          "Show me learning resources 📚",
+          "What's the salary range? 💰",
+          "Find me practice projects 🛠️",
+          "Create study schedule ⏰"
         ]
       };
       setMessages(prev => [...prev, aiMessage]);
       setIsTyping(false);
     }, 1500);
+  };
+  const navigate=useNavigate();
+
+  const handleBackToHome = () => {
+    navigate('/');
   };
 
   const handleSuggestionClick = (suggestion) => {
@@ -104,127 +113,184 @@ const AIGuide = () => {
   };
 
   const handleQuickAction = (action) => {
-    handleSendMessage(`I need help with ${action.text.toLowerCase()}: ${action.description}`);
+    handleSendMessage(`I want to learn ${action.text}: ${action.description}`);
   };
 
   const startVoiceInput = () => {
     setIsListening(true);
-    // Simulate voice input
     setTimeout(() => {
       setIsListening(false);
-      setInputMessage("I want to learn web development and become a full-stack developer");
+      setInputMessage("I want to transition into AI and machine learning. What's the best path for 2025?");
     }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className={`h-screen overflow-hidden transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <header className={`h-16 backdrop-blur-lg border-b transition-colors ${
+        darkMode ? 'bg-gray-900/80 border-gray-700' : 'bg-white/80 border-gray-200'
+      }`}>
+        <div className="h-full px-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="flex items-center space-x-2 text-primary hover:text-primary-glow transition-colors">
-              <FaArrowLeft />
-              <span>Back to Home</span>
-            </Link>
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+            <div
+              onClick={handleBackToHome} 
+              className="flex items-center hover:cursor-pointer space-x-2 text-blue-600 dark:text-blue-400"
+            >
+              <ArrowLeft size={20} />
+              <span className="hidden sm:block">Back to Home</span>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-gradient">I-GYAN</div>
-            <div className="text-sm text-muted-foreground">🤖 AI Guide</div>
+          
+          <div className="flex items-center space-x-4">
+            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              I-GYAN
+            </div>
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`p-2 rounded-lg transition-all duration-300 ${
+                darkMode 
+                  ? 'bg-yellow-500 text-yellow-100 hover:bg-yellow-400' 
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Main Chat Interface */}
-      <div className="flex-1 flex">
-        {/* Sidebar - Quick Actions */}
-        <div className="hidden lg:block w-80 bg-muted/30 border-r border-border p-6">
-          <h2 className="text-xl font-bold mb-6 text-gradient">Quick Actions</h2>
-          <div className="space-y-3">
-            {quickActions.map((action, index) => (
-              <button
-                key={index}
-                onClick={() => handleQuickAction(action)}
-                className="w-full p-4 bg-card hover:bg-primary/5 border border-border hover:border-primary/30 rounded-xl transition-all duration-300 text-left group"
-              >
-                <div className="flex items-start space-x-3">
-                  <action.icon className="text-primary mt-1 group-hover:scale-110 transition-transform" />
-                  <div>
-                    <div className="font-semibold text-sm group-hover:text-primary transition-colors">
-                      {action.text}
+      <div className="flex h-[calc(100vh-4rem)]">
+        {/* Sidebar */}
+        <div className={`fixed lg:relative inset-y-0 left-0 z-40 w-80 transform transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        } ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r h-full`}>
+          <div className="p-6 h-full overflow-y-auto">
+            <h2 className={`text-xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+              🚀 Learning Paths
+            </h2>
+            
+            {/* Quick Actions */}
+            <div className="space-y-3 mb-8">
+              {quickActions.map((action, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleQuickAction(action)}
+                  className={`w-full p-4 rounded-xl transition-all duration-300 text-left group hover:scale-[1.02] ${
+                    darkMode 
+                      ? 'bg-gray-700 hover:bg-gray-600 border border-gray-600' 
+                      : 'bg-gray-100 hover:bg-gray-100 border border-gray-200'
+                  }`}
+                >
+                  <div className="flex items-start space-x-3">
+                    <div className={`p-2 rounded-lg ${action.color}`}>
+                      <action.icon className="text-white" size={18} />
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      {action.description}
+                    <div className="flex-1">
+                      <div className={`font-semibold text-sm ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                        {action.text}
+                      </div>
+                      <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {action.description}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </button>
-            ))}
-          </div>
+                </button>
+              ))}
+            </div>
 
-          {/* AI Stats */}
-          <div className="mt-8 p-4 bg-gradient-primary rounded-xl text-white">
-            <h3 className="font-bold mb-3">AI Guide Stats</h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span>Students Guided</span>
-                <span>12,000+</span>
+            {/* Trending Skills */}
+            <div className={`p-4 rounded-xl bg-blue-600 text-white mb-6`}>
+              <h3 className="font-bold mb-3 flex items-center">
+                <Rocket className="mr-2" size={16} />
+                Trending 2025
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {modernSkills.slice(0, 4).map((skill, index) => (
+                  <span key={index} className="px-2 py-1 bg-white/20 rounded-full text-xs">
+                    {skill}
+                  </span>
+                ))}
               </div>
-              <div className="flex justify-between">
-                <span>Career Paths</span>
-                <span>500+</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Success Rate</span>
-                <span>94%</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Response Time</span>
-                <span>&lt; 2 sec</span>
+            </div>
+
+            {/* Stats */}
+            <div className={`p-4 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}>
+              <h3 className={`font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                AI Guide Impact
+              </h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Learners Guided</span>
+                  <span className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>25,000+</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Success Rate</span>
+                  <span className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>96%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Avg. Response</span>
+                  <span className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>&lt; 1 sec</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Chat Area */}
-        <div className="flex-1 flex flex-col">
+        {/* Main Chat */}
+        <div className="flex-1 flex flex-col h-full">
           {/* Chat Header */}
-          <div className="p-6 border-b border-border bg-gradient-to-r from-primary/5 to-secondary/5">
+          <div className={`p-4 md:p-6 border-b ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center animate-pulse-glow">
-                <FaRobot className="text-white text-xl" />
+              <div className="relative">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                  <Bot className="text-white" size={24} />
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
               </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gradient">GYAN-AI Assistant</h1>
-                <p className="text-muted-foreground">Your personal learning and career guide</p>
+              <div className="flex-1">
+                <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                  I-GYAN AI Assistant
+                </h1>
+                <p className={`text-base ${darkMode ? 'text-gray-400' : 'text-gray-600'}, font-semibold`}>
+                  Specialized in 2025 tech skills & career guidance
+                </p>
               </div>
-              <div className="ml-auto flex items-center space-x-2">
-                <div className="w-3 h-3 bg-success rounded-full animate-pulse"></div>
-                <span className="text-sm text-success font-semibold">Online</span>
+              <div className="hidden sm:flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm text-green-500 font-medium">Active</span>
               </div>
             </div>
           </div>
 
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          {/* Messages - Scrollable Area */}
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
             {messages.map((message) => (
               <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-3xl ${message.type === 'user' ? 'order-2' : ''}`}>
+                <div className={`max-w-[85%] md:max-w-3xl ${message.type === 'user' ? 'order-2' : ''}`}>
                   <div className={`flex items-start space-x-3 ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
                       message.type === 'user' 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-gradient-secondary text-white'
+                        ? 'bg-blue-500 text-white' 
+                        : 'bg-purple-600 text-white'
                     }`}>
-                      {message.type === 'user' ? <FaUser /> : <FaRobot />}
+                      {message.type === 'user' ? <User size={16} /> : <Bot size={16} />}
                     </div>
                     
                     <div className={`flex-1 ${message.type === 'user' ? 'text-right' : ''}`}>
-                      <div className={`inline-block p-4 rounded-2xl ${
+                      <div className={`inline-block p-3 md:p-4 rounded-2xl max-w-full ${
                         message.type === 'user'
-                          ? 'bg-primary text-primary-foreground'
-                          : 'bg-card border border-border'
+                          ? 'bg-blue-500 text-white'
+                          : darkMode 
+                            ? 'bg-gray-700 text-white border border-gray-600'
+                            : 'bg-white text-gray-800 border border-gray-200 shadow-sm'
                       }`}>
-                        <p className="text-sm leading-relaxed">{message.content}</p>
+                        <p className="text-sm leading-relaxed break-words">{message.content}</p>
                       </div>
                       
                       {/* Suggestions */}
@@ -234,7 +300,11 @@ const AIGuide = () => {
                             <button
                               key={index}
                               onClick={() => handleSuggestionClick(suggestion)}
-                              className="px-3 py-1 bg-muted hover:bg-primary/10 border border-border hover:border-primary/30 rounded-full text-xs transition-all duration-300"
+                              className={`px-3 py-1 rounded-full text-xs transition-all duration-300 ${
+                                darkMode
+                                  ? 'bg-gray-700 hover:bg-gray-600 border border-gray-600 text-gray-300'
+                                  : 'bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700'
+                              }`}
                             >
                               {suggestion}
                             </button>
@@ -242,7 +312,9 @@ const AIGuide = () => {
                         </div>
                       )}
                       
-                      <div className={`text-xs text-muted-foreground mt-2 ${message.type === 'user' ? 'text-right' : ''}`}>
+                      <div className={`text-xs mt-2 ${
+                        message.type === 'user' ? 'text-right' : ''
+                      } ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </div>
                     </div>
@@ -255,14 +327,16 @@ const AIGuide = () => {
             {isTyping && (
               <div className="flex justify-start">
                 <div className="flex items-start space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-secondary text-white flex items-center justify-center animate-pulse">
-                    <FaRobot />
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-purple-600 text-white flex items-center justify-center animate-pulse">
+                    <Bot size={16} />
                   </div>
-                  <div className="bg-card border border-border p-4 rounded-2xl">
+                  <div className={`p-3 md:p-4 rounded-2xl ${
+                    darkMode ? 'bg-gray-700 border border-gray-600' : 'bg-white border border-gray-200'
+                  }`}>
                     <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                     </div>
                   </div>
                 </div>
@@ -272,99 +346,83 @@ const AIGuide = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area */}
-          <div className="p-6 border-t border-border bg-muted/30">
+          {/* Input Area - Fixed at Bottom */}
+          <div className={`p-4 md:p-6 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
             <div className="max-w-4xl mx-auto">
-              <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }} className="flex space-x-4">
+              <div className="flex space-x-2 md:space-x-4">
                 <div className="flex-1 relative">
                   <input
                     type="text"
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    placeholder="Ask me anything about careers, learning, or skills... 💭"
-                    className="w-full px-6 py-4 bg-background border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                    placeholder="Ask about AI, coding, career paths, or any learning topic... 🚀"
+                    className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-all ${
+                      darkMode
+                        ? 'bg-gray-700 border border-gray-600 text-white placeholder-gray-400'
+                        : 'bg-gray-50 border border-gray-200 text-gray-800 placeholder-gray-500'
+                    }`}
                     disabled={isTyping}
                   />
                   
-                  {/* Voice Input Button */}
                   <button
                     type="button"
                     onClick={startVoiceInput}
-                    className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-all ${
+                    className={`absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-all ${
                       isListening 
                         ? 'bg-red-500 text-white animate-pulse' 
-                        : 'bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary'
+                        : darkMode
+                          ? 'bg-gray-600 hover:bg-gray-500 text-gray-300'
+                          : 'bg-gray-200 hover:bg-gray-300 text-gray-600'
                     }`}
                   >
-                    <FaMicrophone />
+                    <Mic size={16} />
                   </button>
                 </div>
                 
                 <button
-                  type="submit"
+                  onClick={() => handleSendMessage()}
                   disabled={!inputMessage.trim() || isTyping}
-                  className="px-6 py-4 bg-primary text-primary-foreground rounded-2xl hover:bg-primary-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                  className="px-4 md:px-6 py-3 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
                 >
-                  <FaPaperPlane />
+                  <Send size={16} />
                   <span className="hidden sm:block">Send</span>
                 </button>
-              </form>
+              </div>
               
               {/* Quick Suggestions */}
               <div className="mt-4 flex flex-wrap gap-2 justify-center">
-                <button 
-                  onClick={() => handleSendMessage("What skills are in demand in 2024?")}
-                  className="px-3 py-1 bg-card hover:bg-primary/5 border border-border hover:border-primary/30 rounded-full text-xs transition-all"
-                >
-                  🔥 Trending Skills
-                </button>
-                <button 
-                  onClick={() => handleSendMessage("How do I switch careers?")}
-                  className="px-3 py-1 bg-card hover:bg-primary/5 border border-border hover:border-primary/30 rounded-full text-xs transition-all"
-                >
-                  🔄 Career Switch
-                </button>
-                <button 
-                  onClick={() => handleSendMessage("Create a 6-month learning plan")}
-                  className="px-3 py-1 bg-card hover:bg-primary/5 border border-border hover:border-primary/30 rounded-full text-xs transition-all"
-                >
-                  📅 Learning Plan
-                </button>
-                <button 
-                  onClick={() => handleSendMessage("How to build a portfolio?")}
-                  className="px-3 py-1 bg-card hover:bg-primary/5 border border-border hover:border-primary/30 rounded-full text-xs transition-all"
-                >
-                  💼 Portfolio Tips
-                </button>
+                {[
+                  "🔥 AI Tools for Learning",
+                  "💻 Remote Job Skills",
+                  "🎯 Career Transition",
+                  "📱 Build Portfolio"
+                ].map((suggestion, index) => (
+                  <button 
+                    key={index}
+                    onClick={() => handleSendMessage(suggestion)}
+                    className={`px-3 py-1 rounded-full text-xs transition-all hover:scale-105 ${
+                      darkMode
+                        ? 'bg-gray-700 hover:bg-gray-600 border border-gray-600 text-gray-300'
+                        : 'bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700'
+                    }`}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Features Banner */}
-      <div className="bg-gradient-hero p-6 text-white">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-4 gap-6 text-center">
-            <div className="flex items-center justify-center space-x-2">
-              <FaLightbulb className="text-yellow-300" />
-              <span className="text-sm">Personalized Guidance</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <FaRocket className="text-blue-300" />
-              <span className="text-sm">Real-time Responses</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <FaStar className="text-yellow-300" />
-              <span className="text-sm">Expert Knowledge</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <FaHeart className="text-pink-300" />
-              <span className="text-sm">Always Available</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Overlay for mobile sidebar */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
     </div>
   );
 };
