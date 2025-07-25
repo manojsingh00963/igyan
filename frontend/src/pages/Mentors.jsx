@@ -137,8 +137,8 @@ const Mentor = () => {
     }
   ];
 
-  const filteredMentors = mentors.filter(mentor => 
-    selectedCategory === 'All' || mentor.expertise.some(skill => 
+  const filteredMentors = mentors.filter(mentor =>
+    selectedCategory === 'All' || mentor.expertise.some(skill =>
       skill.toLowerCase().includes(selectedCategory.toLowerCase())
     )
   );
@@ -149,7 +149,7 @@ const Mentor = () => {
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="flex items-center space-x-2 text-primary hover:text-primary-glow transition-colors">
+            <Link to="/" className="flex items-center space-x-2 text-blue-800 hover:text-blue-800-glow transition-colors">
               <FaArrowLeft />
               <span>Back to Home</span>
             </Link>
@@ -163,7 +163,7 @@ const Mentor = () => {
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-secondary relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-gray-800"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-slide-up">
@@ -172,23 +172,21 @@ const Mentor = () => {
             <p className="text-xl md:text-2xl mb-8 opacity-90">
               Learn from industry experts and accelerate your career growth
             </p>
-            
+
             {/* Toggle Buttons */}
             <div className="flex justify-center mb-8">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-2 flex">
                 <button
                   onClick={() => setViewMode('find')}
-                  className={`px-6 py-3 rounded-xl transition-all ${
-                    viewMode === 'find' ? 'bg-white text-primary font-semibold' : 'text-white'
-                  }`}
+                  className={`px-6 py-3 rounded-xl transition-all ${viewMode === 'find' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
+                    }`}
                 >
                   Find a Mentor
                 </button>
                 <button
                   onClick={() => setViewMode('apply')}
-                  className={`px-6 py-3 rounded-xl transition-all ${
-                    viewMode === 'apply' ? 'bg-white text-primary font-semibold' : 'text-white'
-                  }`}
+                  className={`px-6 py-3 rounded-xl transition-all ${viewMode === 'apply' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
+                    }`}
                 >
                   Become a Mentor
                 </button>
@@ -218,11 +216,10 @@ const Mentor = () => {
                   <button
                     key={index}
                     onClick={() => setSelectedCategory(category.name)}
-                    className={`px-4 py-2 rounded-full transition-all duration-300 ${
-                      selectedCategory === category.name
-                        ? 'bg-primary text-primary-foreground shadow-soft'
+                    className={`px-4 py-2 rounded-full transition-all duration-300 ${selectedCategory === category.name
+                        ? 'bg-blue-700 text-whiteshadow-soft'
                         : 'bg-card border border-border hover:border-primary/50'
-                    }`}
+                      }`}
                   >
                     <span className="mr-2">{category.emoji}</span>
                     {category.name}
@@ -239,9 +236,9 @@ const Mentor = () => {
               <h2 className="text-3xl font-bold mb-8 text-center text-gradient">
                 Featured Mentors ⭐
               </h2>
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <div className="grid md:grid-cols-2 gap-8 mb-12 border ">
                 {filteredMentors.filter(m => m.featured).map((mentor) => (
-                  <div key={mentor.id} className="card-glow group">
+                  <div key={mentor.id} className="card-glow group border-2 ">
                     <div className="p-6">
                       {/* Header */}
                       <div className="flex items-start space-x-4 mb-6">
@@ -250,7 +247,7 @@ const Mentor = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
-                            <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
+                            <h3 className="text-xl font-bold group-hover:text-blue-800 transition-colors">
                               {mentor.name}
                             </h3>
                             {mentor.verified && (
@@ -274,7 +271,7 @@ const Mentor = () => {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-primary">{mentor.hourlyRate}</div>
+                          <div className="text-2xl font-bold text-blue-800">{mentor.hourlyRate}</div>
                           <div className="text-xs text-muted-foreground">per hour</div>
                         </div>
                       </div>
@@ -287,7 +284,7 @@ const Mentor = () => {
                         <h4 className="font-semibold mb-2 text-sm">Expertise</h4>
                         <div className="flex flex-wrap gap-2">
                           {mentor.expertise.map((skill, index) => (
-                            <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
+                            <span key={index} className="px-2 py-1 bg-blue-700/10 text-blue-800 rounded-full text-xs">
                               {skill}
                             </span>
                           ))}
@@ -328,13 +325,13 @@ const Mentor = () => {
 
                       {/* Action Buttons */}
                       <div className="flex space-x-3">
-                        <button className="flex-1 bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary-glow transition-colors">
+                        <button className="flex-1 bg-blue-700 text-white py-3 rounded-xl font-semibold hover:bg-blue-700-glow transition-colors">
                           Book Session
                         </button>
-                        <button className="px-4 py-3 border border-border rounded-xl hover:border-primary transition-colors">
+                        <button className="px-4 py-3 border border-border rounded-xl hover:border-blue-700 transition-colors">
                           <FaComment />
                         </button>
-                        <button className="px-4 py-3 border border-border rounded-xl hover:border-primary transition-colors">
+                        <button className="px-4 py-3 border border-border rounded-xl hover:border-blue-700 transition-colors">
                           <FaHeart />
                         </button>
                       </div>
@@ -350,14 +347,14 @@ const Mentor = () => {
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredMentors.filter(m => !m.featured).map((mentor) => (
-                    <div key={mentor.id} className="card-glow group">
+                    <div key={mentor.id} className="card-glow group border " >
                       <div className="p-6">
                         {/* Header */}
                         <div className="text-center mb-4">
                           <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">
                             {mentor.avatar}
                           </div>
-                          <h3 className="text-lg font-bold group-hover:text-primary transition-colors">
+                          <h3 className="text-lg font-bold group-hover:text-blue-800 transition-colors">
                             {mentor.name}
                           </h3>
                           <p className="text-muted-foreground text-sm">{mentor.title}</p>
@@ -373,7 +370,7 @@ const Mentor = () => {
                             <FaUsers />
                             <span>{mentor.students} students</span>
                           </div>
-                          <div className="font-bold text-primary">{mentor.hourlyRate}/hr</div>
+                          <div className="font-bold text-blue-800">{mentor.hourlyRate}/hr</div>
                         </div>
 
                         {/* Expertise */}
@@ -394,7 +391,7 @@ const Mentor = () => {
                         </div>
 
                         {/* CTA */}
-                        <button className="w-full bg-primary text-primary-foreground py-2 rounded-lg font-semibold hover:bg-primary-glow transition-colors">
+                        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold hover:bg-blue-700-glow transition-colors">
                           View Profile
                         </button>
                       </div>
@@ -423,7 +420,7 @@ const Mentor = () => {
                     <div className="p-6">
                       <h3 className="text-xl font-bold mb-2">{program.title}</h3>
                       <p className="text-muted-foreground mb-4">{program.description}</p>
-                      <div className="text-3xl font-bold text-primary mb-2">{program.price}</div>
+                      <div className="text-3xl font-bold text-blue-800 mb-2">{program.price}</div>
                       <div className="text-sm text-muted-foreground mb-6">{program.duration}</div>
                       <ul className="space-y-2 mb-6">
                         {program.features.map((feature, idx) => (
@@ -433,7 +430,7 @@ const Mentor = () => {
                           </li>
                         ))}
                       </ul>
-                      <button className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary-glow transition-colors">
+                      <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold hover:bg-blue-700-glow transition-colors">
                         Get Started
                       </button>
                     </div>
@@ -462,28 +459,28 @@ const Mentor = () => {
                   <h3 className="text-2xl font-bold">Why Mentor with I-GYAN?</h3>
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3">
-                      <div className="text-primary text-xl">💰</div>
+                      <div className="text-blue-800 text-xl">💰</div>
                       <div>
                         <h4 className="font-semibold">Earn Extra Income</h4>
                         <p className="text-muted-foreground text-sm">Set your own rates and work flexible hours</p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <div className="text-primary text-xl">🚀</div>
+                      <div className="text-blue-800 text-xl">🚀</div>
                       <div>
                         <h4 className="font-semibold">Give Back to Community</h4>
                         <p className="text-muted-foreground text-sm">Help shape the future of technology and business</p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <div className="text-primary text-xl">📈</div>
+                      <div className="text-blue-800 text-xl">📈</div>
                       <div>
                         <h4 className="font-semibold">Build Your Brand</h4>
                         <p className="text-muted-foreground text-sm">Establish yourself as a thought leader in your field</p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <div className="text-primary text-xl">🤝</div>
+                      <div className="text-blue-800 text-xl">🤝</div>
                       <div>
                         <h4 className="font-semibold">Network & Learn</h4>
                         <p className="text-muted-foreground text-sm">Connect with peers and stay updated with trends</p>
@@ -525,7 +522,7 @@ const Mentor = () => {
                         <label className="block text-sm font-semibold mb-2">LinkedIn Profile</label>
                         <input type="url" className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
                       </div>
-                      <button type="submit" className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:bg-primary-glow transition-colors">
+                      <button type="submit" className="w-full bg-blue-700 text-whitepy-3 rounded-lg font-semibold hover:bg-blue-700-glow transition-colors">
                         Submit Application
                       </button>
                     </form>

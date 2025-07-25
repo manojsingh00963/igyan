@@ -11,6 +11,7 @@ const navItems = [
   { name: 'AIGuide', path: '/aiguide' },
   { name: 'Companies', path: '/companies' },
   { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/contact' },
 ];
 
 const Navbar = () => {

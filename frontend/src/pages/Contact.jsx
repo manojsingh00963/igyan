@@ -159,7 +159,7 @@ const Contact = () => {
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-cool relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-gray-800"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-slide-up">
@@ -194,7 +194,7 @@ const Contact = () => {
                 onClick={() => setSelectedCategory(reason.id)}
                 className={`p-6 rounded-2xl transition-all duration-300 text-center ${
                   selectedCategory === reason.id
-                    ? 'bg-primary text-primary-foreground shadow-glow scale-105'
+                    ? 'bg-blue-700 text-white shadow-glow scale-105'
                     : 'bg-card border border-border hover:border-primary/50 hover:shadow-soft'
                 }`}
               >
@@ -285,7 +285,7 @@ const Contact = () => {
 
                     <button
                       type="submit"
-                      className="w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold hover:bg-primary-glow transition-all duration-300 flex items-center justify-center space-x-2"
+                      className="w-full bg-blue-700 text-white py-4 rounded-xl font-semibold hover:bg-blue-700-glow transition-all duration-300 flex items-center justify-center space-x-2"
                     >
                       <FaRocket />
                       <span>Send Message</span>
@@ -336,19 +336,19 @@ const Contact = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-6 text-gradient">Follow Us</h3>
                   <div className="grid grid-cols-2 gap-4">
-                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-primary/10 transition-colors">
+                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-blue-700/10 transition-colors">
                       <FaLinkedin className="text-blue-600 text-xl" />
                       <span className="font-semibold">LinkedIn</span>
                     </a>
-                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-primary/10 transition-colors">
+                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-blue-700/10 transition-colors">
                       <FaTwitter className="text-blue-400 text-xl" />
                       <span className="font-semibold">Twitter</span>
                     </a>
-                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-primary/10 transition-colors">
+                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-blue-700/10 transition-colors">
                       <FaInstagram className="text-pink-500 text-xl" />
                       <span className="font-semibold">Instagram</span>
                     </a>
-                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-primary/10 transition-colors">
+                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-blue-700/10 transition-colors">
                       <FaYoutube className="text-red-500 text-xl" />
                       <span className="font-semibold">YouTube</span>
                     </a>

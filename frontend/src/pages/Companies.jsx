@@ -183,7 +183,7 @@ const Companies = () => {
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="flex items-center space-x-2 text-primary hover:text-primary-glow transition-colors">
+            <Link to="/" className="flex items-center space-x-2 text-blue-800 hover:text-blue-800-glow transition-colors">
               <FaArrowLeft />
               <span>Back to Home</span>
             </Link>
@@ -197,7 +197,7 @@ const Companies = () => {
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-warm relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-gray-800"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-slide-up">
@@ -213,7 +213,7 @@ const Companies = () => {
                 <button
                   onClick={() => setSelectedTab('projects')}
                   className={`px-6 py-3 rounded-xl transition-all ${
-                    selectedTab === 'projects' ? 'bg-white text-primary font-semibold' : 'text-white'
+                    selectedTab === 'projects' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
                   }`}
                 >
                   Browse Projects
@@ -221,7 +221,7 @@ const Companies = () => {
                 <button
                   onClick={() => setSelectedTab('partnership')}
                   className={`px-6 py-3 rounded-xl transition-all ${
-                    selectedTab === 'partnership' ? 'bg-white text-primary font-semibold' : 'text-white'
+                    selectedTab === 'partnership' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
                   }`}
                 >
                   Partner with Us
@@ -256,7 +256,7 @@ const Companies = () => {
                       className="w-full pl-12 pr-4 py-3 rounded-xl border border-border focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
-                  <button className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary-glow transition-colors">
+                  <button className="px-6 py-3 bg-blue-700 text-white rounded-xl font-semibold hover:bg-blue-700-glow transition-colors">
                     <FaFilter className="mr-2" />
                     Filter
                   </button>
@@ -270,7 +270,7 @@ const Companies = () => {
                       onClick={() => setSelectedCategory(category.name)}
                       className={`px-4 py-2 rounded-full transition-all duration-300 ${
                         selectedCategory === category.name
-                          ? 'bg-primary text-primary-foreground shadow-soft'
+                          ? 'bg-blue-700 text-white shadow-soft'
                           : 'bg-card border border-border hover:border-primary/50'
                       }`}
                     >
@@ -301,7 +301,7 @@ const Companies = () => {
                             {project.companyLogo}
                           </div>
                           <div>
-                            <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
+                            <h3 className="text-xl font-bold group-hover:text-blue-800 transition-colors">
                               {project.title}
                             </h3>
                             <p className="text-muted-foreground text-sm">{project.company}</p>
@@ -330,7 +330,7 @@ const Companies = () => {
                       <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
                         <div>
                           <div className="text-muted-foreground">Budget</div>
-                          <div className="font-semibold text-primary">{project.budget}</div>
+                          <div className="font-semibold text-blue-800">{project.budget}</div>
                         </div>
                         <div>
                           <div className="text-muted-foreground">Duration</div>
@@ -351,7 +351,7 @@ const Companies = () => {
                         <h4 className="font-semibold mb-2 text-sm">Required Skills</h4>
                         <div className="flex flex-wrap gap-2">
                           {project.skills.map((skill, index) => (
-                            <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
+                            <span key={index} className="px-2 py-1 bg-blue-700/10 text-blue-800 rounded-full text-xs">
                               {skill}
                             </span>
                           ))}
@@ -374,7 +374,7 @@ const Companies = () => {
 
                       {/* Action Buttons */}
                       <div className="flex space-x-3">
-                        <button className="flex-1 bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary-glow transition-colors">
+                        <button className="flex-1 bg-blue-700 text-white py-3 rounded-xl font-semibold hover:bg-blue-700-glow transition-colors">
                           Apply Now
                         </button>
                         <button className="px-4 py-3 border border-border rounded-xl hover:border-primary transition-colors">
@@ -404,7 +404,7 @@ const Companies = () => {
                             {project.companyLogo}
                           </div>
                           <div>
-                            <h3 className="font-bold group-hover:text-primary transition-colors">
+                            <h3 className="font-bold group-hover:text-blue-800 transition-colors">
                               {project.title}
                             </h3>
                             <p className="text-muted-foreground text-sm">{project.company}</p>
@@ -415,7 +415,7 @@ const Companies = () => {
                         <div className="space-y-2 mb-4 text-sm">
                           <div className="flex items-center justify-between">
                             <span className="text-muted-foreground">Budget:</span>
-                            <span className="font-semibold text-primary">{project.budget}</span>
+                            <span className="font-semibold text-blue-800">{project.budget}</span>
                           </div>
                           <div className="flex items-center justify-between">
                             <span className="text-muted-foreground">Duration:</span>
@@ -439,7 +439,7 @@ const Companies = () => {
                         </div>
 
                         {/* CTA */}
-                        <button className="w-full bg-primary text-primary-foreground py-2 rounded-lg font-semibold hover:bg-primary-glow transition-colors">
+                        <button className="w-full bg-blue-700 text-white py-2 rounded-lg font-semibold hover:bg-blue-700-glow transition-colors">
                           View Details
                         </button>
                       </div>
@@ -534,28 +534,28 @@ const Companies = () => {
                   <h3 className="text-2xl font-bold">How It Works</h3>
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3">
-                      <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">1</div>
+                      <div className="bg-blue-700 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">1</div>
                       <div>
                         <h4 className="font-semibold">Submit Partnership Request</h4>
                         <p className="text-muted-foreground text-sm">Fill out our partnership form with your requirements</p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">2</div>
+                      <div className="bg-blue-700 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">2</div>
                       <div>
                         <h4 className="font-semibold">Consultation Call</h4>
                         <p className="text-muted-foreground text-sm">Discuss your needs with our partnership team</p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">3</div>
+                      <div className="bg-blue-700 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">3</div>
                       <div>
                         <h4 className="font-semibold">Get Matched</h4>
                         <p className="text-muted-foreground text-sm">Receive curated talent recommendations</p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">4</div>
+                      <div className="bg-blue-700 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">4</div>
                       <div>
                         <h4 className="font-semibold">Start Collaborating</h4>
                         <p className="text-muted-foreground text-sm">Begin working with selected candidates</p>
@@ -603,7 +603,7 @@ const Companies = () => {
                         <label className="block text-sm font-semibold mb-2">Project Requirements</label>
                         <textarea className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" rows="4" placeholder="Describe your project needs, skills required, timeline, etc."></textarea>
                       </div>
-                      <button type="submit" className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:bg-primary-glow transition-colors">
+                      <button type="submit" className="w-full bg-blue-700 text-white py-3 rounded-lg font-semibold hover:bg-blue-700-glow transition-colors">
                         Submit Partnership Request
                       </button>
                     </form>
@@ -614,19 +614,19 @@ const Companies = () => {
               {/* Stats */}
               <div className="grid md:grid-cols-4 gap-8 mt-16 text-center">
                 <div>
-                  <div className="text-3xl font-bold text-primary">100+</div>
+                  <div className="text-3xl font-bold text-blue-800">100+</div>
                   <div className="text-muted-foreground">Partner Companies</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-primary">500+</div>
+                  <div className="text-3xl font-bold text-blue-800">500+</div>
                   <div className="text-muted-foreground">Projects Completed</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-primary">95%</div>
+                  <div className="text-3xl font-bold text-blue-800">95%</div>
                   <div className="text-muted-foreground">Client Satisfaction</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-primary">₹2Cr+</div>
+                  <div className="text-3xl font-bold text-blue-800">₹2Cr+</div>
                   <div className="text-muted-foreground">Total Earnings</div>
                 </div>
               </div>

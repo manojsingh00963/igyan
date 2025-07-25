@@ -165,7 +165,7 @@ const StudentProjects = () => {
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-cool relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-gray-800"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-slide-up">
@@ -219,7 +219,7 @@ const StudentProjects = () => {
                 onClick={() => setSelectedCategory(category.name)}
                 className={`px-4 py-2 rounded-full transition-all duration-300 ${
                   selectedCategory === category.name
-                    ? 'bg-primary text-primary-foreground shadow-soft'
+                    ? 'bg-blue-700 text-whiteshadow-soft'
                     : 'bg-card border border-border hover:border-primary/50'
                 }`}
               >
@@ -274,7 +274,7 @@ const StudentProjects = () => {
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags.slice(0, 3).map((tag, index) => (
-                        <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
+                        <span key={index} className="px-2 py-1 bg-blue-700/10 text-primary rounded-full text-xs">
                           {tag}
                         </span>
                       ))}
@@ -304,7 +304,7 @@ const StudentProjects = () => {
 
                     {/* Action Buttons */}
                     <div className="flex space-x-2">
-                      <button className="flex-1 bg-primary text-primary-foreground py-2 rounded-lg text-sm font-semibold hover:bg-primary-glow transition-colors">
+                      <button className="flex-1 bg-blue-700 text-white text-whitepy-2 rounded-lg text-sm font-semibold hover:bg-blue-700-glow transition-colors">
                         <FaEye className="inline mr-1" />
                         View Project
                       </button>
@@ -385,7 +385,7 @@ const StudentProjects = () => {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-primary">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-blue-900">
             <h2 className="text-4xl font-bold mb-8">
               Ready to Build Something Amazing? 🚀
             </h2>
