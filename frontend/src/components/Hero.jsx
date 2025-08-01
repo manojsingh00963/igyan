@@ -80,7 +80,7 @@ const Hero = ({ isLoggedIn }) => {
         <section className="relative bg-blue-50 overflow-hidden">
             {/* Hero Section */}
             <section
-                className="relative py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+                className="relative py-6 sm:py-8 md:py-12 lg:py-14 xl:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
                 style={{
                     backgroundImage: `url(${bgimg})`,
                     backgroundSize: 'cover',
@@ -101,9 +101,13 @@ const Hero = ({ isLoggedIn }) => {
                     </div>
 
                     {/* Main Heading */}
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-2 sm:mb-4 leading-tight px-2 sm:px-0">
+                    <span className="block mb-2 sm:mb-0 sm:inline">Learn. Build. Get Hired.</span>
+                    </h1>
                     <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight px-2 sm:px-0">
-                        <span className="block mb-2 sm:mb-0 sm:inline">Learn. Build. Get Hired.</span>
-                        <span className="text-blue-600 dark:text-blue-400 block mt-2 sm:mt-4">
+                        
+                        <span className="text-blue-600 dark:text-blue-400 block  typing-text"
+                         >
                             Real Skills. Real Projects. Real Mentors.
                         </span>
                     </h1>

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Book, Code, Trophy, Briefcase, X, BookOpen, Users, Building2 } from "lucide-react";
+import { Book, Code, Trophy, Briefcase, BookOpen } from "lucide-react";
+import LoginModal from "./LoginModal";
+import { useAuth } from '../context/AuthContext';
 
 const HowItWorks = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [showLogin, setShowLogin] = useState(false);
-  const [loginType, setLoginType] = useState('learner');
-  const [isSignUp, setIsSignUp] = useState(false);
+  const { isLoggedIn, setShowLogin } = useAuth();
+  
   const buttons = ["Learn", "Build", "Show", "Get Hired"];
 
   const content = {
@@ -110,12 +111,23 @@ const HowItWorks = () => {
     </div>
   }
 
+  const handleStartJourney = () => {
+    if (!isLoggedIn) {
+      setShowLogin(true);
+    } else {
+      // User is already logged in, redirect to dashboard or courses
+      // You can navigate to a specific route here
+      console.log('User is logged in, redirecting to dashboard...');
+      // Example: navigate('/dashboard') or navigate('/courses')
+    }
+  };
+
   return (
     <section id="work-flow-id">
       <div className="container w-full pt-8 md:pt-12 pb-8 md:pb-12 bg-gray-50 dark:bg-gray-800">
         <div className="working-heading p-2 md:p-4">
           <div className="heading-work text-center dark:text-white text-gray-800 font-bold text-3xl md:text-5xl mb-2">
-            How I-GYAN Works
+            How I-GYAN.AI Works
           </div>
           <div className="text-center text-gray-600 dark:text-white text-lg md:text-xl mb-8">
             Your journey from learning to career success
@@ -126,9 +138,9 @@ const HowItWorks = () => {
                 key={index}
                 onClick={() => setSelectedIndex(index)}
                 className={`text-sm sm:text-base md:text-xl transition-all duration-300 w-full sm:w-auto 
-                ${selectedIndex === index ? "bg-blue-600 text-white shadow-lg scale-105" : "bg-white text-gray-700 hover:bg-blue-50"} 
+                ${selectedIndex === index ? "bg-blue-600 text-white shadow-lg scale-105" : "bg-white text-gray-700 hover:bg-blue-50 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"} 
                 hover:scale-105 py-3 md:py-4 px-6 sm:px-8 md:px-12 lg:px-20 
-                border border-gray-200 mb-2 sm:mb-0 sm:mx-1 rounded-lg font-medium shadow-sm`}>
+                border border-gray-200 dark:border-gray-600 mb-2 sm:mb-0 sm:mx-1 rounded-lg font-medium shadow-sm`}>
                 {label}
               </button>
             ))}
@@ -138,150 +150,39 @@ const HowItWorks = () => {
           {content[selectedIndex]}
         </div>
         <div className="get-a-quote justify-center mt-8 md:mt-12 flex flex-wrap px-4">
-          <div className="text-center bg-blue-600 text-white p-6 md:p-8 rounded-3xl shadow-lg max-w-lg"> 
-            <span className="text-lg md:text-xl font-semibold block mb-4">
-              Ready to Transform Your Career?
-            </span>
+          <div className="text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 md:p-8 rounded-3xl shadow-lg max-w-lg border border-blue-500/20"> 
+            <div className="flex items-center justify-center mb-4">
+              <BookOpen className="mr-2" size={24} />
+              <span className="text-lg md:text-xl font-semibold">
+                Ready to Transform Your Career?
+              </span>
+            </div>
+            <p className="text-blue-100 text-sm md:text-base mb-6">
+              {isLoggedIn 
+                ? "Continue your learning journey and unlock new opportunities!"
+                : "Join thousands of learners and start your journey to success today!"
+              }
+            </p>
             <button 
-              onClick={() => setShowLogin(true)}
-              className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors duration-200 shadow-md">
-              START YOUR JOURNEY TODAY
+              onClick={handleStartJourney}
+              className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 flex items-center justify-center mx-auto gap-2">
+              {isLoggedIn ? (
+                <>
+                  <BookOpen size={16} />
+                  <span>CONTINUE LEARNING</span>
+                </>
+              ) : (
+                <>
+                  <span>START YOUR JOURNEY TODAY</span>
+                </>
+              )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Login Modal */}
-      {showLogin && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold">
-                {isSignUp ? 'Join I-GYAN' : 'Welcome to I-GYAN'}
-              </h2>
-              <button
-                onClick={() => setShowLogin(false)}
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-
-            {/* Login Selection */}
-            <div className="mb-6">
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">I am a:</p>
-              <div className="grid grid-cols-3 gap-2">
-                <button
-                  onClick={() => setLoginType('learner')}
-                  className={`p-3 rounded-lg border-2 transition-colors ${
-                    loginType === 'learner'
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                      : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
-                  }`}
-                >
-                  <BookOpen className="h-6 w-6 mx-auto mb-1" />
-                  <div className="text-sm font-medium">Learner</div>
-                </button>
-                <button
-                  onClick={() => setLoginType('mentor')}
-                  className={`p-3 rounded-lg border-2 transition-colors ${
-                    loginType === 'mentor'
-                      ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400'
-                      : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
-                  }`}
-                >
-                  <Users className="h-6 w-6 mx-auto mb-1" />
-                  <div className="text-sm font-medium">Mentor</div>
-                </button>
-                <button
-                  onClick={() => setLoginType('company')}
-                  className={`p-3 rounded-lg border-2 transition-colors ${
-                    loginType === 'company'
-                      ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400'
-                      : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
-                  }`}
-                >
-                  <Building2 className="h-6 w-6 mx-auto mb-1" />
-                  <div className="text-sm font-medium">Company</div>
-                </button>
-              </div>
-            </div>
-
-            {/* Auth Form */}
-            <div className="space-y-4">
-              {isSignUp && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 transition-colors"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-              )}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email or Phone
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 transition-colors"
-                  placeholder="Enter your email or phone"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 transition-colors"
-                  placeholder="Enter your password"
-                />
-              </div>
-              {isSignUp && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 transition-colors"
-                    placeholder="Confirm your password"
-                  />
-                </div>
-              )}
-              <button
-                onClick={() => {
-                  setShowLogin(false);
-                  console.log("User logged in successfully as:", loginType);
-                }}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors"
-              >
-                {isSignUp ? 'Create Account & Continue' : 'Login & Continue'}
-              </button>
-            </div>
-
-            <div className="mt-4 text-center">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
-                <button 
-                  onClick={() => setIsSignUp(!isSignUp)}
-                  className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-                >
-                  {isSignUp ? 'Sign in' : 'Sign up now'}
-                </button>
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* LoginModal will be rendered by AuthContext when showLogin is true */}
+      <LoginModal />
     </section>
   );
 };

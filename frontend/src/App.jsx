@@ -11,9 +11,8 @@ import Companies from "./pages/Companies";
 import StudentProjects from "./pages/Projects";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
-import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Signup";
 import StudentDashboard from "./pages/Dashboard/StudentDashboard";
+import CourseModulePage from "./pages/Courses";
 
 function App() {
   return (
@@ -29,13 +28,12 @@ function App() {
             <Route path="/projects" element={<StudentProjects />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/companies" element={<Companies />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/courses" element={<CourseModulePage/>}/>
             <Route path="/dashboard/student" element={<StudentDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
-        </div>
+        </div>  
       </AuthProvider>
     </ThemeProvider>
   );
