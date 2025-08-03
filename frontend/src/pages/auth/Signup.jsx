@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaGoogle, FaGithub, FaUser, FaGraduationCap, FaBuilding } from 'react-icons/fa';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle , Input, Button,  } from '../../components/ui/progress'
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);

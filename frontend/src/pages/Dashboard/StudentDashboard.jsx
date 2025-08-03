@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { FaBook, FaTrophy, FaProjectDiagram, FaCertificate, FaCalendar, FaBell, FaUser, FaChartLine, FaPlay, FaPause } from 'react-icons/fa';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 
 const StudentDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -35,21 +32,21 @@ const StudentDashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-primary/5">
       {/* Header */}
-      <div className="bg-card border-b px-6 py-4">
+      <div className="bg-div border-b px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">Welcome back, Alex! 👋</h1>
             <p className="text-muted-foreground">Ready to continue your learning journey?</p>
           </div>
           <div className="flex items-center space-x-4">
-            <Button variant="outline" size="sm">
+            <button variant="outline" size="sm">
               <FaBell className="h-4 w-4 mr-2" />
               Notifications
-            </Button>
-            <Button variant="outline" size="sm">
+            </button>
+            <button variant="outline" size="sm">
               <FaUser className="h-4 w-4 mr-2" />
               Profile
-            </Button>
+            </button>
           </div>
         </div>
       </div>
@@ -60,8 +57,8 @@ const StudentDashboard = () => {
           {stats.map((stat, index) => {
             const IconComponent = stat.icon;
             return (
-              <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <CardContent className="p-6">
+              <div key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <div className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
@@ -69,8 +66,8 @@ const StudentDashboard = () => {
                     </div>
                     <IconComponent className={`h-8 w-8 ${stat.color}`} />
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             );
           })}
         </div>
@@ -79,15 +76,15 @@ const StudentDashboard = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Continue Learning */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
+            <div>
+              <divHeader>
+                <divTitle className="flex items-center">
                   <FaPlay className="h-5 w-5 mr-2 text-primary" />
                   Continue Learning
-                </CardTitle>
-                <CardDescription>Pick up where you left off</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
+                </divTitle>
+                <divDescription>Pick up where you left off</divDescription>
+              </divHeader>
+              <divContent className="space-y-4">
                 {recentCourses.map((course) => (
                   <div key={course.id} className="p-4 border rounded-lg hover:bg-accent/50 transition-colors">
                     <div className="flex items-center justify-between mb-2">
@@ -99,23 +96,23 @@ const StudentDashboard = () => {
                       <span className="text-sm font-medium">{course.progress}%</span>
                     </div>
                     <div className="flex items-center space-x-3">
-                      <Progress value={course.progress} className="flex-1" />
-                      <Button size="sm">Continue</Button>
+                      <div value={course.progress} className="flex-1" />
+                      <button size="sm">Continue</button>
                     </div>
                   </div>
                 ))}
-              </CardContent>
-            </Card>
+              </divContent>
+            </div>
 
             {/* Recent Achievements */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
+            <div>
+              <divHeader>
+                <divTitle className="flex items-center">
                   <FaTrophy className="h-5 w-5 mr-2 text-yellow-500" />
                   Recent Achievements
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+                </divTitle>
+              </divHeader>
+              <divContent>
                 <div className="space-y-3">
                   {achievements.map((achievement) => (
                     <div key={achievement.id} className="flex items-center space-x-3 p-3 rounded-lg border">
@@ -127,21 +124,21 @@ const StudentDashboard = () => {
                     </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              </divContent>
+            </div>
           </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Upcoming Tasks */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
+            <div>
+              <divHeader>
+                <divTitle className="flex items-center">
                   <FaCalendar className="h-5 w-5 mr-2 text-blue-500" />
                   Upcoming Tasks
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
+                </divTitle>
+              </divHeader>
+              <divContent className="space-y-3">
                 {upcomingTasks.map((task) => (
                   <div key={task.id} className="p-3 border rounded-lg">
                     <div className="flex items-start justify-between mb-2">
@@ -157,42 +154,42 @@ const StudentDashboard = () => {
                     <p className="text-sm text-muted-foreground">Due: {task.due}</p>
                   </div>
                 ))}
-              </CardContent>
-            </Card>
+              </divContent>
+            </div>
 
             {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button className="w-full justify-start">
+            <div>
+              <divHeader>
+                <divTitle>Quick Actions</divTitle>
+              </divHeader>
+              <divContent className="space-y-3">
+                <button className="w-full justify-start">
                   <FaBook className="h-4 w-4 mr-2" />
                   Browse Courses
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
+                </button>
+                <button variant="outline" className="w-full justify-start">
                   <FaProjectDiagram className="h-4 w-4 mr-2" />
                   Submit Project
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
+                </button>
+                <button variant="outline" className="w-full justify-start">
                   <FaCertificate className="h-4 w-4 mr-2" />
                   View Certificates
-                </Button>
-              </CardContent>
-            </Card>
+                </button>
+              </divContent>
+            </div>
 
             {/* AI Study Assistant */}
-            <Card className="bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
-              <CardHeader>
-                <CardTitle className="text-primary">🤖 AI Study Buddy</CardTitle>
-                <CardDescription>Get personalized learning recommendations</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full">
+            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
+              <divHeader>
+                <divTitle className="text-primary">🤖 AI Study Buddy</divTitle>
+                <divDescription>Get personalized learning recommendations</divDescription>
+              </divHeader>
+              <divContent>
+                <button className="w-full">
                   Ask AI for Help
-                </Button>
-              </CardContent>
-            </Card>
+                </button>
+              </divContent>
+            </div>
           </div>
         </div>
       </div>
