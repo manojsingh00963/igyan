@@ -110,42 +110,7 @@ const startVoiceInput = () => {
 
 return (
   <div className={`h-screen overflow-hidden transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
-    {/* Header */}
-    <header className={`h-16 backdrop-blur-lg border-b transition-colors ${darkMode ? 'bg-gray-900/80 border-gray-700' : 'bg-white/80 border-gray-200'
-      }`}>
-      <div className="h-full px-4 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-          >
-            {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-          <div
-            onClick={handleBackToHome}
-            className="flex items-center hover:cursor-pointer space-x-2 text-blue-600 dark:text-blue-400"
-          >
-            <ArrowLeft size={20} />
-            <span className="hidden sm:block">Back to Home</span>
-          </div>
-        </div>
-
-        <div className="flex items-center space-x-4">
-          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-            I-GYAN
-          </div>
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className={`p-2 rounded-lg transition-all duration-300 ${darkMode
-                ? 'bg-yellow-500 text-yellow-100 hover:bg-yellow-400'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-          >
-            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-        </div>
-      </div>
-    </header>
+    
 
     <div className="flex h-[calc(100vh-4rem)]">
       {/* Sidebar */}
