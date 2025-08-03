@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl font-bold text-blue-600 ">I-GYAN</span>
+                <span className="text-2xl font-bold text-blue-600 ">I-GYAN.AI</span>
               </div>
               <p className="text-background/80">Empowering careers through AI-powered education</p>
             </div>

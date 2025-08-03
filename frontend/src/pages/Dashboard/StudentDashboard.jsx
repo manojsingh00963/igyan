@@ -77,6 +77,7 @@ const StudentDashboard = () => {
           <div className="lg:col-span-2 space-y-6">
             {/* Continue Learning */}
             <div>
+<<<<<<< HEAD
               <divHeader>
                 <divTitle className="flex items-center">
                   <FaPlay className="h-5 w-5 mr-2 text-primary" />
@@ -85,6 +86,16 @@ const StudentDashboard = () => {
                 <divDescription>Pick up where you left off</divDescription>
               </divHeader>
               <divContent className="space-y-4">
+=======
+              <div>
+                <div className="flex items-center">
+                  <FaPlay className="h-5 w-5 mr-2 text-primary" />
+                  Continue Learning
+                </div>
+                <div>Pick up where you left off</div>
+              </div>
+              <div className="space-y-4">
+>>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
                 {recentCourses.map((course) => (
                   <div key={course.id} className="p-4 border rounded-lg hover:bg-accent/50 transition-colors">
                     <div className="flex items-center justify-between mb-2">
@@ -101,11 +112,16 @@ const StudentDashboard = () => {
                     </div>
                   </div>
                 ))}
+<<<<<<< HEAD
               </divContent>
+=======
+              </div>
+>>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
             </div>
 
             {/* Recent Achievements */}
             <div>
+<<<<<<< HEAD
               <divHeader>
                 <divTitle className="flex items-center">
                   <FaTrophy className="h-5 w-5 mr-2 text-yellow-500" />
@@ -113,6 +129,15 @@ const StudentDashboard = () => {
                 </divTitle>
               </divHeader>
               <divContent>
+=======
+              <div>
+                <div className="flex items-center">
+                  <FaTrophy className="h-5 w-5 mr-2 text-yellow-500" />
+                  Recent Achievements
+                </div>
+              </div>
+              <div>
+>>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
                 <div className="space-y-3">
                   {achievements.map((achievement) => (
                     <div key={achievement.id} className="flex items-center space-x-3 p-3 rounded-lg border">
@@ -124,7 +149,11 @@ const StudentDashboard = () => {
                     </div>
                   ))}
                 </div>
+<<<<<<< HEAD
               </divContent>
+=======
+              </div>
+>>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
             </div>
           </div>
 
@@ -132,6 +161,7 @@ const StudentDashboard = () => {
           <div className="space-y-6">
             {/* Upcoming Tasks */}
             <div>
+<<<<<<< HEAD
               <divHeader>
                 <divTitle className="flex items-center">
                   <FaCalendar className="h-5 w-5 mr-2 text-blue-500" />
@@ -139,6 +169,15 @@ const StudentDashboard = () => {
                 </divTitle>
               </divHeader>
               <divContent className="space-y-3">
+=======
+              <div>
+                <div className="flex items-center">
+                  <FaCalendar className="h-5 w-5 mr-2 text-blue-500" />
+                  Upcoming Tasks
+                </div>
+              </div>
+              <div className="space-y-3">
+>>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
                 {upcomingTasks.map((task) => (
                   <div key={task.id} className="p-3 border rounded-lg">
                     <div className="flex items-start justify-between mb-2">
@@ -154,16 +193,28 @@ const StudentDashboard = () => {
                     <p className="text-sm text-muted-foreground">Due: {task.due}</p>
                   </div>
                 ))}
+<<<<<<< HEAD
               </divContent>
+=======
+              </div>
+>>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
             </div>
 
             {/* Quick Actions */}
             <div>
+<<<<<<< HEAD
               <divHeader>
                 <divTitle>Quick Actions</divTitle>
               </divHeader>
               <divContent className="space-y-3">
                 <button className="w-full justify-start">
+=======
+              <div>
+                <div>Quick Actions</div>
+              </div>
+              <div className="space-y-3">
+                <Button className="w-full justify-start">
+>>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
                   <FaBook className="h-4 w-4 mr-2" />
                   Browse Courses
                 </button>
@@ -174,12 +225,18 @@ const StudentDashboard = () => {
                 <button variant="outline" className="w-full justify-start">
                   <FaCertificate className="h-4 w-4 mr-2" />
                   View Certificates
+<<<<<<< HEAD
                 </button>
               </divContent>
+=======
+                </Button>
+              </div>
+>>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
             </div>
 
             {/* AI Study Assistant */}
             <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
+<<<<<<< HEAD
               <divHeader>
                 <divTitle className="text-primary">🤖 AI Study Buddy</divTitle>
                 <divDescription>Get personalized learning recommendations</divDescription>
@@ -189,6 +246,17 @@ const StudentDashboard = () => {
                   Ask AI for Help
                 </button>
               </divContent>
+=======
+              <div>
+                <div className="text-primary">🤖 AI Study Buddy</div>
+                <div>Get personalized learning recommendations</div>
+              </div>
+              <div>
+                <Button className="w-full">
+                  Ask AI for Help
+                </Button>
+              </div>
+>>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
             </div>
           </div>
         </div>
