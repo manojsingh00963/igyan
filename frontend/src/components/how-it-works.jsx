@@ -1,187 +1,290 @@
-import React, { useState } from "react";
-import { Book, Code, Trophy, Briefcase, BookOpen } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Book, Code, Trophy, Briefcase, BookOpen, Brain, Zap, Target, Rocket, ChevronRight, Sparkles } from "lucide-react";
 import LoginModal from "./LoginModal";
 import { useAuth } from '../context/AuthContext';
 
 const HowItWorks = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [animatedCards, setAnimatedCards] = useState(new Set());
   const { isLoggedIn, setShowLogin } = useAuth();
   
   const buttons = ["Learn", "Build", "Show", "Get Hired"];
 
-  const content = {
-    0: <div className="flex flex-col md:flex-row justify-center working-explain0 p-4">
-      <div className="details flex flex-col mb-6 md:mb-0 md:ml-2">
-        <span className="text-blue-600 text-xl md:text-2xl font-bold flex items-center">
-          <Book className="mr-2" size={28} /> Learn
-        </span>
-        <span className="text-base md:text-lg ml-6 md:ml-10 mt-2">
-          AI-personalized learning paths with interactive content tailored to your skill level and career goals.
-        </span>
-        <span className="text-base md:text-lg ml-6 md:ml-10 mt-1">
-          Access comprehensive courses, tutorials, and resources designed by industry experts.
-        </span>
-        <span className="text-base md:text-lg ml-6 md:ml-10 mt-1">
-          Track your progress and adapt your learning journey in real-time.
-        </span>
-      </div>
-      <div className="working-media mx-auto md:ml-8">
-        <div className="rounded-3xl w-full max-w-xs md:max-w-md bg-gradient-to-br from-blue-100 to-blue-200 p-8 flex items-center justify-center">
-          <Book size={120} className="text-blue-600 opacity-70" />
-        </div>
-      </div>
-    </div>,
+  // Auto-cycle through steps
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSelectedIndex((prev) => (prev + 1) % buttons.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
-    1: <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 max-w-6xl working-explain1 p-4">
-      <div className="working-media mx-auto mb-6 md:mb-0 md:ml-8 md:flex-1 order-1 md:order-none">
-        <div className="rounded-3xl w-full max-w-xs md:max-w-md bg-gradient-to-br from-purple-100 to-purple-200 p-8 flex items-center justify-center">
-          <Code size={120} className="text-purple-600 opacity-70" />
-        </div>
-      </div>
-      <div className="details md:flex-1 flex flex-col">
-        <span className="text-purple-600 text-xl md:text-2xl font-bold flex items-center">
-          <Code className="mr-2" size={28} /> Build
-        </span>
-        <br />
-        <div className="text-base md:text-lg ml-4 md:ml-8">
-          Create real projects with mentor guidance to build your portfolio and gain hands-on experience.
-          Work on industry-relevant projects that showcase your skills to potential employers.
-          <br />
-          <br />
-          Get personalized feedback from experienced mentors who guide you through complex challenges.
-          Collaborate with peers on team projects that simulate real workplace environments.
-          <br />
-          <br />
-          Build a diverse portfolio that demonstrates your technical abilities and problem-solving skills
-          across various domains and technologies.
-        </div>
-      </div>
-    </div>,
+  // Intersection observer for animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            const cardIndex = entry.target.getAttribute('data-card-index');
+            if (cardIndex) {
+              setAnimatedCards(prev => new Set([...prev, parseInt(cardIndex)]));
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    2: <div className="flex flex-col md:flex-row justify-center gap-4 max-w-6xl working-explain2 p-4">
-      <div className="details md:flex-1 flex flex-col mb-6 md:mb-0">
-        <span className="text-yellow-600 text-xl md:text-2xl font-bold flex items-center">
-          <Trophy className="mr-2" size={28} /> Show
-        </span>
-        <br />
-        <div className="text-base md:text-lg ml-4 md:ml-8">
-          Showcase your work in our talent marketplace where employers actively search for skilled professionals.
-          Create a compelling profile that highlights your projects, skills, and achievements.
-          <br />
-          <br />
-          Participate in coding challenges, hackathons, and competitions to demonstrate your expertise.
-          Get recognized by industry leaders and build your professional network.
-          <br />
-          <br />
-          Receive detailed analytics on profile views, project engagement, and employer interest
-          to optimize your visibility and marketability.
-        </div>
-      </div>
-      <div className="working-media mx-auto md:ml-8 md:flex-1">
-        <div className="rounded-3xl w-full max-w-xs md:max-w-md bg-gradient-to-br from-yellow-100 to-yellow-200 p-8 flex items-center justify-center">
-          <Trophy size={120} className="text-yellow-600 opacity-70" />
-        </div>
-      </div>
-    </div>,
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach((el) => observer.observe(el));
 
-    3: <div className="flex flex-col md:flex-row justify-center gap-4 max-w-6xl working-explain3 p-4">
-      <div className="working-media mx-auto mb-6 md:mb-0 md:ml-8 md:flex-1 order-1 md:order-none">
-        <div className="rounded-3xl w-full max-w-xs md:max-w-md bg-gradient-to-br from-green-100 to-green-200 p-8 flex items-center justify-center">
-          <Briefcase size={120} className="text-green-600 opacity-70" />
-        </div>
-      </div>
-      <div className="details md:flex-1 flex flex-col">
-        <span className="text-green-600 text-xl md:text-2xl font-bold flex items-center">
-          <Briefcase className="mr-2" size={28} /> Get Hired
-        </span>
-        <br />
-        <div className="text-base md:text-lg ml-4 md:ml-8">
-          Connect with companies actively hiring through our extensive network of industry partners.
-          Get matched with opportunities that align with your skills, interests, and career goals.
-          <br/>
-          <br/>
-          Receive interview preparation support, resume optimization, and career guidance from our placement team.
-          Access exclusive job openings and fast-track recruitment processes.
-          <br/>
-          <br/>
-          Join a community of successful graduates who have landed positions at top companies.
-          Get ongoing career support and alumni networking opportunities to accelerate your professional growth.
-        </div>
-      </div>
-    </div>
-  }
+    return () => observer.disconnect();
+  }, []);
+
+  const steps = [
+    {
+      icon: Book,
+      title: "AI-Powered Learning",
+      color: "blue",
+      bgColor: "bg-blue-50",
+      iconColor: "text-blue-600",
+      borderColor: "border-blue-200",
+      description: "Personalized learning paths powered by advanced AI algorithms",
+      features: [
+        "Smart content recommendations based on your learning style",
+        "Real-time progress tracking with predictive analytics",
+        "Adaptive difficulty adjustment for optimal learning curve"
+      ]
+    },
+    {
+      icon: Code,
+      title: "Smart Project Building",
+      color: "purple",
+      bgColor: "bg-purple-50",
+      iconColor: "text-purple-600",
+      borderColor: "border-purple-200",
+      description: "Build real-world projects with AI-assisted guidance",
+      features: [
+        "AI code review and optimization suggestions",
+        "Intelligent project matching based on skill level",
+        "Automated testing and deployment assistance"
+      ]
+    },
+    {
+      icon: Trophy,
+      title: "AI Portfolio Showcase",
+      color: "orange",
+      bgColor: "bg-orange-50",
+      iconColor: "text-orange-600",
+      borderColor: "border-orange-200",
+      description: "Showcase your work with AI-enhanced presentation",
+      features: [
+        "Automated portfolio optimization for maximum impact",
+        "AI-generated project descriptions and highlights",
+        "Smart matching with relevant job opportunities"
+      ]
+    },
+    {
+      icon: Briefcase,
+      title: "Intelligent Job Matching",
+      color: "green",
+      bgColor: "bg-green-50",
+      iconColor: "text-green-600",
+      borderColor: "border-green-200",
+      description: "Get hired faster with AI-powered job matching",
+      features: [
+        "AI resume optimization for ATS systems",
+        "Intelligent interview preparation with mock sessions",
+        "Predictive job matching based on skills and preferences"
+      ]
+    }
+  ];
+
+  const currentStep = steps[selectedIndex];
 
   const handleStartJourney = () => {
     if (!isLoggedIn) {
       setShowLogin(true);
     } else {
-      // User is already logged in, redirect to dashboard or courses
-      // You can navigate to a specific route here
       console.log('User is logged in, redirecting to dashboard...');
-      // Example: navigate('/dashboard') or navigate('/courses')
     }
   };
 
   return (
-    <section id="work-flow-id">
-      <div className="container w-full pt-8 md:pt-12 pb-8 md:pb-12 bg-gray-50 dark:bg-gray-800">
-        <div className="working-heading p-2 md:p-4">
-          <div className="heading-work text-center dark:text-white text-gray-800 font-bold text-3xl md:text-5xl mb-2">
-            How I-GYAN.AI Works
+    <section id="work-flow-id" className="relative overflow-hidden bg-white">
+      {/* AI-themed background pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='53' cy='7' r='1'/%3E%3Ccircle cx='7' cy='53' r='1'/%3E%3Ccircle cx='53' cy='53' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+      </div>
+
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        {/* Header Section */}
+        <div className={`text-center mb-16 animate-on-scroll transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+            How <span className="text-blue-600">I-GYAN.AI</span> Works
+          </h2>
+          
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Experience the future of learning with our AI-driven approach to career development
+          </p>
+        </div>
+
+        {/* Step Navigation */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {buttons.map((label, index) => (
+            <button
+              key={index}
+              onClick={() => setSelectedIndex(index)}
+              className={`relative px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 ${
+                selectedIndex === index
+                  ? `${steps[index].iconColor} bg-white shadow-lg border-2 ${steps[index].borderColor}`
+                  : "text-gray-600 bg-gray-100 hover:bg-gray-200 border-2 border-transparent"
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                {React.createElement(steps[index].icon, { size: 20 })}
+                <span>{label}</span>
+              </div>
+              
+              {selectedIndex === index && (
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                  <div className={`w-2 h-2 ${steps[index].bgColor} rounded-full animate-pulse`} />
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Main Content Area */}
+        <div className="max-w-6xl mx-auto">
+          <div className={`${currentStep.bgColor} rounded-3xl p-8 md:p-12 border-2 ${currentStep.borderColor} transition-all duration-500 transform`}>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              
+              {/* Content Side */}
+              <div className={`${selectedIndex % 2 === 1 ? 'md:order-2' : ''}`}>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className={`p-3 bg-white rounded-xl shadow-md ${currentStep.iconColor}`}>
+                    {React.createElement(currentStep.icon, { size: 32 })}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                      {currentStep.title}
+                    </h3>
+                    <p className="text-gray-600 mt-1">{currentStep.description}</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {currentStep.features.map((feature, idx) => (
+                    <div 
+                      key={idx}
+                      className={`flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm transition-all duration-300 delay-${idx * 100} ${
+                        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
+                      }`}
+                    >
+                      <div className={`p-1 ${currentStep.iconColor} bg-opacity-20 rounded-full mt-1`}>
+                        <ChevronRight size={16} className={currentStep.iconColor} />
+                      </div>
+                      <p className="text-gray-700 font-medium">{feature}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Visual Side */}
+              <div className={`${selectedIndex % 2 === 1 ? 'md:order-1' : ''} flex justify-center`}>
+                <div className="relative">
+                  {/* Main Icon Container */}
+                  <div className={`w-64 h-64 bg-white rounded-3xl shadow-xl flex items-center justify-center relative overflow-hidden`}>
+                    {/* Animated background circles */}
+                    <div className={`absolute inset-0 ${currentStep.bgColor} opacity-20`} />
+                    <div className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full animate-pulse" />
+                    <div className="absolute bottom-4 left-4 w-6 h-6 bg-white rounded-full animate-pulse delay-300" />
+                    
+                    {/* Main Icon */}
+                    <div className={`relative z-10 ${currentStep.iconColor} transform transition-all duration-500 hover:scale-110`}>
+                      {React.createElement(currentStep.icon, { size: 120, strokeWidth: 1.5 })}
+                    </div>
+                  </div>
+
+                  {/* Floating Elements */}
+                  <div className="absolute -top-4 -right-4 bg-blue-500 text-white p-2 rounded-full animate-bounce">
+                    <Zap size={16} />
+                  </div>
+                  <div className="absolute -bottom-4 -left-4 bg-orange-500 text-white p-2 rounded-full animate-bounce delay-500">
+                    <Target size={16} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="text-center text-gray-600 dark:text-white text-lg md:text-xl mb-8">
-            Your journey from learning to career success
-          </div>
-          <div className="work-flow flex flex-wrap justify-center mt-4 md:mt-8 mb-4 md:mb-8">
-            {buttons.map((label, index) => (
-              <button
+        </div>
+
+        {/* Progress Indicator */}
+        <div className="flex justify-center mt-8">
+          <div className="flex gap-2">
+            {buttons.map((_, index) => (
+              <div
                 key={index}
-                onClick={() => setSelectedIndex(index)}
-                className={`text-sm sm:text-base md:text-xl transition-all duration-300 w-full sm:w-auto 
-                ${selectedIndex === index ? "bg-blue-600 text-white shadow-lg scale-105" : "bg-white text-gray-700 hover:bg-blue-50 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"} 
-                hover:scale-105 py-3 md:py-4 px-6 sm:px-8 md:px-12 lg:px-20 
-                border border-gray-200 dark:border-gray-600 mb-2 sm:mb-0 sm:mx-1 rounded-lg font-medium shadow-sm`}>
-                {label}
-              </button>
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === selectedIndex ? 'w-8 bg-blue-600' : 'w-2 bg-gray-300'
+                }`}
+              />
             ))}
           </div>
         </div>
-        <div className="flex justify-center px-2">
-          {content[selectedIndex]}
-        </div>
-        <div className="get-a-quote justify-center mt-8 md:mt-12 flex flex-wrap px-4">
-          <div className="text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 md:p-8 rounded-3xl shadow-lg max-w-lg border border-blue-500/20"> 
-            <div className="flex items-center justify-center mb-4">
-              <BookOpen className="mr-2" size={24} />
-              <span className="text-lg md:text-xl font-semibold">
-                Ready to Transform Your Career?
-              </span>
+
+        {/* CTA Section */}
+        <div className="text-center mt-16">
+          <div className="bg-gray-900 text-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-2xl mx-auto relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0" style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`,
+              }} />
             </div>
-            <p className="text-blue-100 text-sm md:text-base mb-6">
-              {isLoggedIn 
-                ? "Continue your learning journey and unlock new opportunities!"
-                : "Join thousands of learners and start your journey to success today!"
-              }
-            </p>
-            <button 
-              onClick={handleStartJourney}
-              className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 flex items-center justify-center mx-auto gap-2">
-              {isLoggedIn ? (
-                <>
-                  <BookOpen size={16} />
-                  <span>CONTINUE LEARNING</span>
-                </>
-              ) : (
-                <>
-                  <span>START YOUR JOURNEY TODAY</span>
-                </>
-              )}
-            </button>
+
+            <div className="relative z-10">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <Rocket className="w-6 h-6 text-blue-400" />
+                <h3 className="text-2xl md:text-3xl font-bold">
+                  Ready to Transform Your Career?
+                </h3>
+              </div>
+              
+              <p className="text-gray-300 text-lg mb-8 max-w-lg mx-auto">
+                {isLoggedIn 
+                  ? "Continue your AI-powered learning journey and unlock new opportunities!"
+                  : "Join thousands of learners and experience the future of education today!"
+                }
+              </p>
+              
+              <button 
+                onClick={handleStartJourney}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center mx-auto gap-3 group"
+              >
+                {isLoggedIn ? (
+                  <>
+                    <BookOpen size={20} />
+                    <span>CONTINUE LEARNING</span>
+                    <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  </>
+                ) : (
+                  <>
+                    <Brain size={20} />
+                    <span>START YOUR AI JOURNEY</span>
+                    <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* LoginModal will be rendered by AuthContext when showLogin is true */}
       <LoginModal />
     </section>
   );

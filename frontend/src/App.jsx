@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
@@ -28,12 +28,12 @@ function App() {
             <Route path="/projects" element={<StudentProjects />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/companies" element={<Companies />} />
-            <Route path="/courses" element={<CourseModulePage/>}/>
+            <Route path="/courses" element={<CourseModulePage />} />
             <Route path="/dashboard/student" element={<StudentDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <Footer />
-        </div>  
+          {useLocation().pathname !== '/aiguide' && <Footer />}
+        </div>
       </AuthProvider>
     </ThemeProvider>
   );

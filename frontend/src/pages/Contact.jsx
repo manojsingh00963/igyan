@@ -141,21 +141,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Link to="/" className="flex items-center space-x-2 text-primary hover:text-primary-glow transition-colors">
-              <FaArrowLeft />
-              <span>Back to Home</span>
-            </Link>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-gradient">I-GYAN</div>
-            <div className="text-sm text-muted-foreground">📞 Contact Us</div>
-          </div>
-        </div>
-      </header>
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-cool relative overflow-hidden">

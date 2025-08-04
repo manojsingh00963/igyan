@@ -6,10 +6,8 @@ import {
   Smartphone, Cloud,
   UserCog
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 const AIGuide = () => {
-  const navigate = useNavigate();
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -55,14 +53,6 @@ const AIGuide = () => {
     "That's a smart career move! I've helped 500+ students transition successfully. Here's your custom action plan..."
   ];
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -71,332 +61,434 @@ const AIGuide = () => {
     }
   }, [darkMode]);
 
-  setTimeout(() => {
-    const aiMessage = {
-      id: Date.now() + 1,
-      type: 'ai',
-      content: aiResponses[Math.floor(Math.random() * aiResponses.length)],
-      timestamp: new Date(),
-      suggestions: [
-        "Show me learning resources 📚",
-        "What's the salary range? 💰",
-        "Find me practice projects 🛠️",
-        "Create study schedule ⏰"
-      ]
+  const handleSendMessage = (messageText = null) => {
+    const message = messageText || inputMessage.trim();
+    if (!message || isTyping) return;
+
+    // Add user message
+    const userMessage = {
+      id: Date.now(),
+      type: 'user',
+      content: message,
+      timestamp: new Date()
     };
-    setMessages(prev => [...prev, aiMessage]);
-    setIsTyping(false);
-  }, 1500);
 
-const handleBackToHome = () => {
-  navigate('/');
-};
+    setMessages(prev => [...prev, userMessage]);
+    setInputMessage('');
+    setIsTyping(true);
 
-const handleSuggestionClick = (suggestion) => {
-  handleSendMessage(suggestion);
-};
+    // Simulate AI response after delay
+    setTimeout(() => {
+      const aiMessage = {
+        id: Date.now() + 1,
+        type: 'ai',
+        content: aiResponses[Math.floor(Math.random() * aiResponses.length)],
+        timestamp: new Date(),
+        suggestions: [
+          "Show me learning resources 📚",
+          "What's the salary range? 💰",
+          "Find me practice projects 🛠️",
+          "Create study schedule ⏰"
+        ]
+      };
+      setMessages(prev => [...prev, aiMessage]);
+      setIsTyping(false);
+    }, 1500);
+  };
 
-const handleQuickAction = (action) => {
-  handleSendMessage(`I want to learn ${action.text}: ${action.description}`);
-};
+  const handleSuggestionClick = (suggestion) => {
+    handleSendMessage(suggestion);
+  };
 
-const startVoiceInput = () => {
-  setIsListening(true);
-  setTimeout(() => {
-    setIsListening(false);
-    setInputMessage("I want to transition into AI and machine learning. What's the best path for 2025?");
-  }, 2000);
-};
+  const handleQuickAction = (action) => {
+    handleSendMessage(`I want to learn ${action.text}: ${action.description}`);
+  };
 
-return (
-  <div className={`h-screen overflow-hidden transition-colors duration-300 ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
-    {/* Header */}
-    <header className={`h-16 backdrop-blur-lg border-b transition-colors ${darkMode ? 'bg-gray-900/80 border-gray-700' : 'bg-white/80 border-gray-200'
-      }`}>
-      <div className="h-full px-4 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-          >
-            {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-          <div
-            onClick={handleBackToHome}
-            className="flex items-center hover:cursor-pointer space-x-2 text-blue-600 dark:text-blue-400"
-          >
-            <ArrowLeft size={20} />
-            <span className="hidden sm:block">Back to Home</span>
-          </div>
-        </div>
+  const startVoiceInput = () => {
+    setIsListening(true);
+    setTimeout(() => {
+      setIsListening(false);
+      setInputMessage("I want to transition into AI and machine learning. What's the best path for 2025?");
+    }, 2000);
+  };
 
-        <div className="flex items-center space-x-4">
-          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-            I-GYAN
-          </div>
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className={`p-2 rounded-lg transition-all duration-300 ${darkMode
-                ? 'bg-yellow-500 text-yellow-100 hover:bg-yellow-400'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-          >
-            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-        </div>
-      </div>
-    </header>
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
-    <div className="flex h-[calc(100vh-4rem)]">
-      {/* Sidebar */}
-      <div className={`fixed lg:relative inset-y-0 left-0 z-40 w-80 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-        } ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r h-full`}>
-        <div className="p-6 h-full overflow-y-auto">
-          <h2 className={`text-xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-            🚀 Learning Paths
-          </h2>
+  const themeClasses = {
+    light: {
+      background: 'bg-slate-100',
+      sidebar: 'bg-white border-slate-200',
+      sidebarText: 'text-slate-800',
+      sidebarSecondary: 'text-slate-600',
+      chatHeader: 'bg-white border-slate-200',
+      messageArea: 'bg-transparent',
+      userMessage: 'bg-blue-600 text-white',
+      aiMessage: 'bg-white text-slate-800 border border-slate-200',
+      inputArea: 'bg-white border-slate-200',
+      input: 'bg-slate-50 border-slate-200 text-slate-800 placeholder-slate-500',
+      button: 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700',
+      suggestionButton: 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700',
+      codePattern: 'text-slate-300',
+      circuitPattern: 'text-slate-200'
+    },
+    dark: {
+      background: 'bg-slate-900',
+      sidebar: 'bg-slate-800 border-slate-700',
+      sidebarText: 'text-slate-100',
+      sidebarSecondary: 'text-slate-300',
+      chatHeader: 'bg-slate-800 border-slate-700',
+      messageArea: 'bg-transparent',
+      userMessage: 'bg-blue-600 text-white',
+      aiMessage: 'bg-slate-800 text-slate-100 border border-slate-700',
+      inputArea: 'bg-slate-800 border-slate-700',
+      input: 'bg-slate-700 border-slate-600 text-slate-100 placeholder-slate-400',
+      button: 'bg-slate-700 hover:bg-slate-600 border-slate-600 text-slate-300',
+      suggestionButton: 'bg-slate-700 hover:bg-slate-600 border-slate-600 text-slate-300',
+      codePattern: 'text-slate-600',
+      circuitPattern: 'text-slate-700'
+    }
+  };
 
-          {/* Quick Actions */}
-          <div className="space-y-3 mb-8">
-            {quickActions.map((action, index) => (
-              <button
-                key={index}
-                onClick={() => handleQuickAction(action)}
-                className={`w-full p-4 rounded-xl transition-all duration-300 text-left group hover:scale-[1.02] ${darkMode
-                    ? 'bg-gray-700 hover:bg-gray-600 border border-gray-600'
-                    : 'bg-gray-100 hover:bg-gray-100 border border-gray-200'
-                  }`}
-              >
-                <div className="flex items-start space-x-3">
-                  <div className={`p-2 rounded-lg ${action.color}`}>
-                    <action.icon className="text-white" size={18} />
-                  </div>
-                  <div className="flex-1">
-                    <div className={`font-semibold text-sm ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                      {action.text}
-                    </div>
-                    <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {action.description}
-                    </div>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
+  const currentTheme = darkMode ? themeClasses.dark : themeClasses.light;
 
-          {/* Trending Skills */}
-          <div className={`p-4 rounded-xl bg-blue-600 text-white mb-6`}>
-            <h3 className="font-bold mb-3 flex items-center">
-              <Rocket className="mr-2" size={16} />
-              Trending 2025
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {modernSkills.slice(0, 4).map((skill, index) => (
-                <span key={index} className="px-2 py-1 bg-white/20 rounded-full text-xs">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+  return (
+    <div className={`min-h-screen transition-all duration-300 ${currentTheme.background} relative overflow-hidden`}>
+      {/* Creative Tech Background Pattern */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-          {/* Stats */}
-          <div className={`p-4 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}>
-            <h3 className={`font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-              AI Guide Impact
-            </h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Learners Guided</span>
-                <span className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>25,000+</span>
-              </div>
-              <div className="flex justify-between">
-                <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Success Rate</span>
-                <span className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>96%</span>
-              </div>
-              <div className="flex justify-between">
-                <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Avg. Response</span>
-                <span className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>&lt; 1 sec</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Circuit Board Pattern */}
+        <svg className={`absolute inset-0 w-full h-full ${currentTheme.circuitPattern} opacity-30`} viewBox="0 0 100 40">
+          <defs>
+            <pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M0 10h10v-2h8v2h2v8h-2v2h-8v-2h-10z" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+              <circle cx="5" cy="5" r="1" fill="currentColor"/>
+              <circle cx="15" cy="15" r="1" fill="currentColor"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#circuit)"/>
+        </svg>
 
-      {/* Main Chat */}
-      <div className="flex-1 flex flex-col h-full">
-        {/* Chat Header */}
-        <div className={`p-4 md:p-6 border-b ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-          <div className="flex items-center space-x-4">
-            <div className="relative">
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                <Bot className="text-white" size={24} />
-              </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
-            </div>
-            <div className="flex-1">
-              <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                I-GYAN AI Assistant
-              </h1>
-              <p className={`text-base ${darkMode ? 'text-gray-400' : 'text-gray-600'}, font-semibold`}>
-                Specialized in 2025 tech skills & career guidance
-              </p>
-            </div>
-            <div className="hidden sm:flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm text-green-500 font-medium">Active</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Messages - Scrollable Area */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
-          {messages.map((message) => (
-            <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[85%] md:max-w-3xl ${message.type === 'user' ? 'order-2' : ''}`}>
-                <div className={`flex items-start space-x-3 ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                  <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${message.type === 'user'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-purple-600 text-white'
-                    }`}>
-                    {message.type === 'user' ? <User size={16} /> : <Bot size={16} />}
-                  </div>
-
-                  <div className={`flex-1 ${message.type === 'user' ? 'text-right' : ''}`}>
-                    <div className={`inline-block p-3 md:p-4 rounded-2xl max-w-full ${message.type === 'user'
-                        ? 'bg-blue-500 text-white'
-                        : darkMode
-                          ? 'bg-gray-700 text-white border border-gray-600'
-                          : 'bg-white text-gray-800 border border-gray-200 shadow-sm'
-                      }`}>
-                      <p className="text-sm leading-relaxed break-words">{message.content}</p>
-                    </div>
-
-                    {/* Suggestions */}
-                    {message.suggestions && (
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {message.suggestions.map((suggestion, index) => (
-                          <button
-                            key={index}
-                            onClick={() => handleSuggestionClick(suggestion)}
-                            className={`px-3 py-1 rounded-full text-xs transition-all duration-300 ${darkMode
-                                ? 'bg-gray-700 hover:bg-gray-600 border border-gray-600 text-gray-300'
-                                : 'bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700'
-                              }`}
-                          >
-                            {suggestion}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className={`text-xs mt-2 ${message.type === 'user' ? 'text-right' : ''
-                      } ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    </div>
-                  </div>
-                </div>
-              </div>
+        {/* Floating Tech Icons */}
+        <div className="absolute inset-0">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className={`absolute ${currentTheme.codePattern} opacity-100 animate-float`}
+              style={{
+                left: `${10 + (i * 12)}%`,
+                top: `${20 + Math.random() * 60}%`,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: `${6 + Math.random() * 4}s`
+              }}
+            >
+              {i % 4 === 0 && <Code size={24} />}
+              {i % 4 === 1 && <Brain size={24} />}
+              {i % 4 === 2 && <Monitor size={24} />}
+              {i % 4 === 3 && <Cloud size={24} />}
             </div>
           ))}
+        </div>
 
-          {/* Typing Indicator */}
-          {isTyping && (
-            <div className="flex justify-start">
-              <div className="flex items-start space-x-3">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-purple-600 text-white flex items-center justify-center animate-pulse">
-                  <Bot size={16} />
+        {/* Geometric Shapes */}
+        <div className="absolute inset-0">
+          <div className={`absolute top-20 left-20 w-32 h-32 border ${darkMode ? 'border-slate-700' : 'border-slate-400'} rotate-45 opacity-20 animate-spin-slow`}></div>
+          <div className={`absolute bottom-32 right-32 w-24 h-24 border ${darkMode ? 'border-slate-600' : 'border-slate-500'} rounded-full opacity-20 animate-pulse`}></div>
+          <div className={`absolute top-1/2 left-10 w-16 h-16 ${darkMode ? 'bg-slate-700' : 'bg-slate-400'} rotate-12 opacity-10 animate-bounce`} style={{animationDuration: '3s'}}></div>
+        </div>
+      </div>
+
+      <div className="relative z-10 flex h-screen pt-0">
+        {/* Sidebar */}
+        <div className={`fixed lg:relative inset-y-0 left-0 z-40 w-80 transform transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        } ${currentTheme.sidebar} border-r pt-16 lg:pt-0`}>
+          <div className="p-6 h-full overflow-y-auto">
+            <h2 className={`text-xl font-bold mb-6 ${currentTheme.sidebarText}`}>
+              🚀 Learning Paths
+            </h2>
+
+            {/* Quick Actions */}
+            <div className="space-y-3 mb-8">
+              {quickActions.map((action, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleQuickAction(action)}
+                  className={`w-full p-4 rounded-xl transition-all duration-300 text-left group hover:scale-[1.02] hover:shadow-md ${
+                    darkMode 
+                      ? 'bg-slate-700/50 hover:bg-slate-700 border border-slate-600' 
+                      : 'bg-slate-50 hover:bg-slate-100 border border-slate-200'
+                  }`}
+                >
+                  <div className="flex items-start space-x-3">
+                    <div className={`p-2 rounded-lg ${action.color} shadow-sm`}>
+                      <action.icon className="text-white" size={18} />
+                    </div>
+                    <div className="flex-1">
+                      <div className={`font-semibold text-sm ${currentTheme.sidebarText}`}>
+                        {action.text}
+                      </div>
+                      <div className={`text-xs ${currentTheme.sidebarSecondary}`}>
+                        {action.description}
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Trending Skills */}
+            <div className="p-4 rounded-xl bg-blue-600 text-white mb-6 shadow-sm">
+              <h3 className="font-bold mb-3 flex items-center">
+                <Rocket className="mr-2" size={16} />
+                Trending 2025
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {modernSkills.slice(0, 4).map((skill, index) => (
+                  <span key={index} className="px-2 py-1 bg-white/20 rounded-full text-xs">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className={`p-4 rounded-xl ${
+              darkMode ? 'bg-slate-700/50' : 'bg-slate-50'
+            } shadow-sm`}>
+              <h3 className={`font-bold mb-3 ${currentTheme.sidebarText}`}>
+                AI Guide Impact
+              </h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className={currentTheme.sidebarSecondary}>Learners Guided</span>
+                  <span className={`font-semibold ${currentTheme.sidebarText}`}>25,000+</span>
                 </div>
-                <div className={`p-3 md:p-4 rounded-2xl ${darkMode ? 'bg-gray-700 border border-gray-600' : 'bg-white border border-gray-200'
-                  }`}>
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                <div className="flex justify-between">
+                  <span className={currentTheme.sidebarSecondary}>Success Rate</span>
+                  <span className={`font-semibold ${currentTheme.sidebarText}`}>96%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className={currentTheme.sidebarSecondary}>Avg. Response</span>
+                  <span className={`font-semibold ${currentTheme.sidebarText}`}>&lt; 1 sec</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Chat */}
+        <div className="flex-1 flex flex-col">
+          {/* Chat Header */}
+          <div className={`p-4 md:p-6 border-b flex-shrink-0 ${currentTheme.chatHeader} shadow-sm`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  className="lg:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+                >
+                  <Menu size={20} />
+                </button>
+                <div className="relative">
+                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center shadow-sm">
+                    <Bot className="text-white" size={24} />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-slate-800 animate-pulse"></div>
+                </div>
+                <div className="flex-1">
+                  <h1 className={`text-xl md:text-2xl font-bold ${currentTheme.sidebarText}`}>
+                    I-GYAN AI Assistant
+                  </h1>
+                  <p className={`text-base ${currentTheme.sidebarSecondary} font-semibold`}>
+                    Specialized in 2025 tech skills & career guidance
+                  </p>
+                </div>
+              </div>
+
+              {/* Dark Mode Toggle */}
+              <div className="flex items-center space-x-4">
+                <div className="hidden sm:flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm text-green-500 font-medium">Active</span>
+                </div>
+                <button
+                  onClick={toggleDarkMode}
+                  className={`relative p-3 rounded-full transition-all duration-300 ${
+                    darkMode 
+                      ? 'bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-400' 
+                      : 'bg-slate-600/20 hover:bg-slate-600/30 text-slate-600'
+                  } shadow-sm hover:scale-110`}
+                  title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                >
+                  {darkMode ? (
+                    <Sun size={20} className="animate-spin" style={{animationDuration: '8s'}} />
+                  ) : (
+                    <Moon size={20} className="animate-pulse" />
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Messages - Scrollable Area */}
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
+            {messages.map((message) => (
+              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`max-w-[85%] md:max-w-3xl ${message.type === 'user' ? 'order-2' : ''}`}>
+                  <div className={`flex items-start space-x-3 ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm ${
+                      message.type === 'user'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-slate-600 text-white'
+                    }`}>
+                      {message.type === 'user' ? <User size={16} /> : <Bot size={16} />}
+                    </div>
+
+                    <div className={`flex-1 ${message.type === 'user' ? 'text-right' : ''}`}>
+                      <div className={`inline-block p-3 md:p-4 rounded-2xl max-w-full transition-all duration-200 hover:scale-[1.01] ${
+                        message.type === 'user'
+                          ? currentTheme.userMessage + ' shadow-sm'
+                          : currentTheme.aiMessage + ' shadow-sm'
+                      }`}>
+                        <p className="text-sm leading-relaxed break-words">{message.content}</p>
+                      </div>
+
+                      {/* Suggestions */}
+                      {message.suggestions && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {message.suggestions.map((suggestion, index) => (
+                            <button
+                              key={index}
+                              onClick={() => handleSuggestionClick(suggestion)}
+                              className={`px-3 py-1 rounded-full text-xs transition-all duration-200 hover:scale-105 ${currentTheme.suggestionButton} shadow-sm`}
+                            >
+                              {suggestion}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+
+                      <div className={`text-xs mt-2 ${message.type === 'user' ? 'text-right' : ''} ${currentTheme.sidebarSecondary}`}>
+                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            ))}
 
-          <div ref={messagesEndRef} />
-        </div>
+            {/* Typing Indicator */}
+            {isTyping && (
+              <div className="flex justify-start">
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-600 text-white flex items-center justify-center animate-pulse shadow-sm">
+                    <Bot size={16} />
+                  </div>
+                  <div className={`p-3 md:p-4 rounded-2xl ${currentTheme.aiMessage}`}>
+                    <div className="flex space-x-1">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
-        {/* Input Area - Fixed at Bottom */}
-        <div className={`p-4 md:p-6 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-          <div className="max-w-4xl mx-auto">
-            <div className="flex space-x-2 md:space-x-4">
-              <div className="flex-1 relative">
-                <input
-                  type="text"
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="Ask about AI, coding, career paths, or any learning topic... 🚀"
-                  className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-all ${darkMode
-                      ? 'bg-gray-700 border border-gray-600 text-white placeholder-gray-400'
-                      : 'bg-gray-50 border border-gray-200 text-gray-800 placeholder-gray-500'
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input Area - Fixed at Bottom */}
+          <div className={`p-4 md:p-6 border-t flex-shrink-0 ${currentTheme.inputArea} shadow-sm`}>
+            <div className="max-w-4xl mx-auto">
+              <div className="flex space-x-2 md:space-x-4">
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    value={inputMessage}
+                    onChange={(e) => setInputMessage(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                    placeholder="Ask about AI, coding, career paths, or any learning topic... 🚀"
+                    className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm transition-all shadow-sm ${currentTheme.input}`}
+                    disabled={isTyping}
+                  />
+
+                  <button
+                    type="button"
+                    onClick={startVoiceInput}
+                    className={`absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-all ${
+                      isListening
+                        ? 'bg-red-500 text-white animate-pulse shadow-sm'
+                        : `${currentTheme.button} hover:scale-110 shadow-sm`
                     }`}
-                  disabled={isTyping}
-                />
+                  >
+                    <Mic size={16} />
+                  </button>
+                </div>
 
                 <button
-                  type="button"
-                  onClick={startVoiceInput}
-                  className={`absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-all ${isListening
-                      ? 'bg-red-500 text-white animate-pulse'
-                      : darkMode
-                        ? 'bg-gray-600 hover:bg-gray-500 text-gray-300'
-                        : 'bg-gray-200 hover:bg-gray-300 text-gray-600'
-                    }`}
+                  onClick={() => handleSendMessage()}
+                  disabled={!inputMessage.trim() || isTyping}
+                  className="px-4 md:px-6 py-3 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 shadow-sm hover:scale-105"
                 >
-                  <Mic size={16} />
+                  <Send size={16} />
+                  <span className="hidden sm:block">Send</span>
                 </button>
               </div>
 
-              <button
-                onClick={() => handleSendMessage()}
-                disabled={!inputMessage.trim() || isTyping}
-                className="px-4 md:px-6 py-3 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
-              >
-                <Send size={16} />
-                <span className="hidden sm:block">Send</span>
-              </button>
-            </div>
-
-            {/* Quick Suggestions */}
-            <div className="mt-4 flex flex-wrap gap-2 justify-center">
-              {[
-                "🔥 AI Tools for Learning",
-                "💻 Remote Job Skills",
-                "🎯 Career Transition",
-                "📱 Build Portfolio"
-              ].map((suggestion, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleSendMessage(suggestion)}
-                  className={`px-3 py-1 rounded-full text-xs transition-all hover:scale-105 ${darkMode
-                      ? 'bg-gray-700 hover:bg-gray-600 border border-gray-600 text-gray-300'
-                      : 'bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700'
-                    }`}
-                >
-                  {suggestion}
-                </button>
-              ))}
+              {/* Quick Suggestions */}
+              <div className="mt-4 flex flex-wrap gap-2 justify-center">
+                {[
+                  "🔥 AI Tools for Learning",
+                  "💻 Remote Job Skills",
+                  "🎯 Career Transition",
+                  "📱 Build Portfolio"
+                ].map((suggestion, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleSendMessage(suggestion)}
+                    className={`px-3 py-1 rounded-full text-xs transition-all hover:scale-105 ${currentTheme.suggestionButton} shadow-sm`}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    {/* Overlay for mobile sidebar */}
-    {sidebarOpen && (
-      <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-        onClick={() => setSidebarOpen(false)}
-      />
-    )}
-  </div>
-);
+      {/* Overlay for mobile sidebar */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-10px) rotate(5deg); }
+          66% { transform: translateY(5px) rotate(-3deg); }
+        }
+        
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+      `}</style>
+    </div>
+  );
 };
 
 export default AIGuide;
