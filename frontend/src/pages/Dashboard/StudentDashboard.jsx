@@ -113,14 +113,14 @@ const StudentDashboard = () => {
             <p className="text-gray-600">Ready to continue your learning journey?</p>
           </div>
           <div className="flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              <Bell className="h-4 w-4 mr-2" />
+            <button variant="outline" size="sm">
+              <FaBell className="h-4 w-4 mr-2" />
               Notifications
-            </Button>
-            <Button variant="outline" size="sm">
-              <User className="h-4 w-4 mr-2" />
+            </button>
+            <button variant="outline" size="sm">
+              <FaUser className="h-4 w-4 mr-2" />
               Profile
-            </Button>
+            </button>
           </div>
         </div>
       </div>
@@ -152,129 +152,120 @@ const StudentDashboard = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Continue Learning */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Play className="h-5 w-5 mr-2 text-blue-600" />
+            <div>
+              <divHeader>
+                <divTitle className="flex items-center">
+                  <FaPlay className="h-5 w-5 mr-2 text-primary" />
                   Continue Learning
-                </CardTitle>
-                <CardDescription>Pick up where you left off</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentCourses.map((course) => (
-                    <div key={course.id} className="p-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-medium text-gray-900">{course.title}</h3>
-                        <span className="text-sm text-gray-600">{course.duration}</span>
-                      </div>
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-sm text-gray-600">Next: {course.nextLesson}</span>
-                        <span className="text-sm font-medium text-gray-900">{course.progress}%</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <Progress value={course.progress} className="flex-1" />
-                        <Button size="sm">Continue</Button>
-                      </div>
+                </divTitle>
+                <divDescription>Pick up where you left off</divDescription>
+              </divHeader>
+              <divContent className="space-y-4">
+                {recentCourses.map((course) => (
+                  <div key={course.id} className="p-4 border rounded-lg hover:bg-accent/50 transition-colors">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-medium">{course.title}</h3>
+                      <span className="text-sm text-muted-foreground">{course.duration}</span>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm text-muted-foreground">Next: {course.nextLesson}</span>
+                      <span className="text-sm font-medium">{course.progress}%</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div value={course.progress} className="flex-1" />
+                      <button size="sm">Continue</button>
+                    </div>
+                  </div>
+                ))}
+              </divContent>
+            </div>
 
             {/* Recent Achievements */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Trophy className="h-5 w-5 mr-2 text-yellow-500" />
+            <div>
+              <divHeader>
+                <divTitle className="flex items-center">
+                  <FaTrophy className="h-5 w-5 mr-2 text-yellow-500" />
                   Recent Achievements
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+                </divTitle>
+              </divHeader>
+              <divContent>
                 <div className="space-y-3">
                   {achievements.map((achievement) => (
-                    <div key={achievement.id} className="flex items-center space-x-3 p-3 rounded-lg border bg-gray-50">
+                    <div key={achievement.id} className="flex items-center space-x-3 p-3 rounded-lg border">
                       <span className="text-2xl">{achievement.icon}</span>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900">{achievement.title}</h4>
-                        <p className="text-sm text-gray-600">Earned on {achievement.date}</p>
+                        <h4 className="font-medium">{achievement.title}</h4>
+                        <p className="text-sm text-muted-foreground">Earned on {achievement.date}</p>
                       </div>
                     </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              </divContent>
+            </div>
           </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Upcoming Tasks */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Calendar className="h-5 w-5 mr-2 text-blue-500" />
+            <div>
+              <divHeader>
+                <divTitle className="flex items-center">
+                  <FaCalendar className="h-5 w-5 mr-2 text-blue-500" />
                   Upcoming Tasks
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {upcomingTasks.map((task) => (
-                    <div key={task.id} className="p-3 border rounded-lg">
-                      <div className="flex items-start justify-between mb-2">
-                        <h4 className="font-medium text-sm text-gray-900">{task.title}</h4>
-                        <span className={`px-2 py-1 rounded text-xs font-medium ${
-                          task.priority === 'high' ? 'bg-red-100 text-red-800' :
-                          task.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-green-100 text-green-800'
-                        }`}>
-                          {task.priority}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600 flex items-center">
-                        <Clock className="h-3 w-3 mr-1" />
-                        Due: {task.due}
-                      </p>
+                </divTitle>
+              </divHeader>
+              <divContent className="space-y-3">
+                {upcomingTasks.map((task) => (
+                  <div key={task.id} className="p-3 border rounded-lg">
+                    <div className="flex items-start justify-between mb-2">
+                      <h4 className="font-medium text-sm">{task.title}</h4>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        task.priority === 'high' ? 'bg-red-100 text-red-800' :
+                        task.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-green-100 text-green-800'
+                      }`}>
+                        {task.priority}
+                      </span>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    <p className="text-sm text-muted-foreground">Due: {task.due}</p>
+                  </div>
+                ))}
+              </divContent>
+            </div>
 
             {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Button className="w-full justify-start">
-                    <Book className="h-4 w-4 mr-2" />
-                    Browse Courses
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <GitBranch className="h-4 w-4 mr-2" />
-                    Submit Project
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Award className="h-4 w-4 mr-2" />
-                    View Certificates
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <div>
+              <divHeader>
+                <divTitle>Quick Actions</divTitle>
+              </divHeader>
+              <divContent className="space-y-3">
+                <button className="w-full justify-start">
+                  <FaBook className="h-4 w-4 mr-2" />
+                  Browse Courses
+                </button>
+                <button variant="outline" className="w-full justify-start">
+                  <FaProjectDiagram className="h-4 w-4 mr-2" />
+                  Submit Project
+                </button>
+                <button variant="outline" className="w-full justify-start">
+                  <FaCertificate className="h-4 w-4 mr-2" />
+                  View Certificates
+                </button>
+              </divContent>
+            </div>
 
             {/* AI Study Assistant */}
-            <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200">
-              <CardHeader>
-                <CardTitle className="text-blue-700">🤖 AI Study Buddy</CardTitle>
-                <CardDescription>Get personalized learning recommendations</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
+            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
+              <divHeader>
+                <divTitle className="text-primary">🤖 AI Study Buddy</divTitle>
+                <divDescription>Get personalized learning recommendations</divDescription>
+              </divHeader>
+              <divContent>
+                <button className="w-full">
                   Ask AI for Help
-                </Button>
-              </CardContent>
-            </Card>
+                </button>
+              </divContent>
+            </div>
           </div>
         </div>
       </div>

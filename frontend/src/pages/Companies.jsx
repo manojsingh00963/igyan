@@ -179,7 +179,6 @@ const Companies = () => {
 
   return (
     <div className="min-h-screen bg-background">
-
       {/* Hero Section */}
       <section className="py-16 bg-gradient-warm relative overflow-hidden">
         <div className="absolute inset-0 bg-gray-800"></div>
@@ -197,7 +196,7 @@ const Companies = () => {
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-2 flex">
                 <button
                   onClick={() => setSelectedTab('projects')}
-                  className={`px-6 py-3 rounded-xl transition-all ${
+                  className={`px-6 py-3 rounded transition-all ${
                     selectedTab === 'projects' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
                   }`}
                 >
@@ -205,7 +204,7 @@ const Companies = () => {
                 </button>
                 <button
                   onClick={() => setSelectedTab('partnership')}
-                  className={`px-6 py-3 rounded-xl transition-all ${
+                  className={`px-6 py-3 rounded transition-all ${
                     selectedTab === 'partnership' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
                   }`}
                 >
@@ -238,10 +237,10 @@ const Companies = () => {
                     <input
                       type="text"
                       placeholder="Search projects, companies, technologies..."
-                      className="w-full pl-12 pr-4 py-3 rounded-xl border border-border focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full pl-12 pr-4 py-3 rounded border border-border focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
-                  <button className="px-6 py-3 bg-blue-700 text-white rounded-xl font-semibold hover:bg-blue-700-glow transition-colors">
+                  <button className="px-6 py-3 bg-blue-700 text-white rounded font-semibold hover:bg-blue-700-glow transition-colors">
                     <FaFilter className="mr-2" />
                     Filter
                   </button>
@@ -359,13 +358,13 @@ const Companies = () => {
 
                       {/* Action Buttons */}
                       <div className="flex space-x-3">
-                        <button className="flex-1 bg-blue-700 text-white py-3 rounded-xl font-semibold hover:bg-blue-700-glow transition-colors">
+                        <button className="flex-1 bg-blue-700 text-white py-3 rounded font-semibold hover:bg-blue-700-glow transition-colors">
                           Apply Now
                         </button>
-                        <button className="px-4 py-3 border border-border rounded-xl hover:border-primary transition-colors">
+                        <button className="px-4 py-3 border border-border rounded hover:border-primary transition-colors">
                           <FaHeart />
                         </button>
-                        <button className="px-4 py-3 border border-border rounded-xl hover:border-primary transition-colors">
+                        <button className="px-4 py-3 border border-border rounded hover:border-primary transition-colors">
                           <FaExternalLinkAlt />
                         </button>
                       </div>

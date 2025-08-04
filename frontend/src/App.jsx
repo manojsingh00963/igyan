@@ -11,8 +11,11 @@ import Companies from "./pages/Companies";
 import StudentProjects from "./pages/Projects";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
+// import Login from "./pages/auth/Login";
+// import Signup from "./pages/auth/Signup";
 import StudentDashboard from "./pages/Dashboard/StudentDashboard";
 import CourseModulePage from "./pages/Courses";
+import AboutPage from "./pages/About";
 
 function App() {
   return (
@@ -28,9 +31,10 @@ function App() {
             <Route path="/projects" element={<StudentProjects />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/companies" element={<Companies />} />
-            <Route path="/courses" element={<CourseModulePage />} />
+            <Route path="/courses" element={<CourseModulePage/>}/>
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/dashboard/student" element={<StudentDashboard />} />
-            <Route path="*" element={<NotFound />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
           {useLocation().pathname !== '/aiguide' && <Footer />}
         </div>

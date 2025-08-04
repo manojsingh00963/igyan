@@ -224,7 +224,7 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                          className="w-full px-4 py-3 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                           placeholder="Your name"
                         />
                       </div>
@@ -236,7 +236,7 @@ const Contact = () => {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                          className="w-full px-4 py-3 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                           placeholder="your@email.com"
                         />
                       </div>
@@ -250,7 +250,7 @@ const Contact = () => {
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="w-full px-4 py-3 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                         placeholder="What's this about?"
                       />
                     </div>
@@ -263,14 +263,14 @@ const Contact = () => {
                         onChange={handleInputChange}
                         required
                         rows="6"
-                        className="w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="w-full px-4 py-3 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                         placeholder="Tell us more about how we can help you..."
                       ></textarea>
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full bg-blue-700 text-white py-4 rounded-xl font-semibold hover:bg-blue-700-glow transition-all duration-300 flex items-center justify-center space-x-2"
+                      className="w-full bg-blue-700 text-white py-4 rounded font-semibold hover:bg-blue-700-glow transition-all duration-300 flex items-center justify-center space-x-2"
                     >
                       <FaRocket />
                       <span>Send Message</span>
@@ -321,19 +321,19 @@ const Contact = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-6 text-gradient">Follow Us</h3>
                   <div className="grid grid-cols-2 gap-4">
-                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-blue-700/10 transition-colors">
+                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded hover:bg-blue-700/10 transition-colors">
                       <FaLinkedin className="text-blue-600 text-xl" />
                       <span className="font-semibold">LinkedIn</span>
                     </a>
-                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-blue-700/10 transition-colors">
+                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded hover:bg-blue-700/10 transition-colors">
                       <FaTwitter className="text-blue-400 text-xl" />
                       <span className="font-semibold">Twitter</span>
                     </a>
-                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-blue-700/10 transition-colors">
+                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded hover:bg-blue-700/10 transition-colors">
                       <FaInstagram className="text-pink-500 text-xl" />
                       <span className="font-semibold">Instagram</span>
                     </a>
-                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded-xl hover:bg-blue-700/10 transition-colors">
+                    <a href="#" className="flex items-center space-x-3 p-3 bg-muted/50 rounded hover:bg-blue-700/10 transition-colors">
                       <FaYoutube className="text-red-500 text-xl" />
                       <span className="font-semibold">YouTube</span>
                     </a>
