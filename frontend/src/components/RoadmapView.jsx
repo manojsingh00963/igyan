@@ -44,7 +44,7 @@ const RoadmapView = ({
             </h4>
             <div className="grid grid-cols-2 gap-3">
               {phase.topics.map((topic, idx) => (
-                <div key={idx} className={`flex items-center space-x-3 p-3 rounded-xl ${
+                <div key={idx} className={`flex items-center space-x-3 p-3 rounded ${
                   darkMode ? 'bg-gray-700/50' : 'bg-gray-50'
                 }`}>
                   <CheckCircle size={16} className={`text-green-500 flex-shrink-0`} />
@@ -292,7 +292,7 @@ const RoadmapView = ({
               </h4>
               <div className="grid grid-cols-2 gap-3">
                 {roadmap.marketInsights.topCompanies.map((company, idx) => (
-                  <div key={idx} className={`p-3 rounded-xl text-center ${
+                  <div key={idx} className={`p-3 rounded text-center ${
                     darkMode ? 'bg-gray-700/50' : 'bg-gray-50'
                   }`}>
                     <span className={`font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>

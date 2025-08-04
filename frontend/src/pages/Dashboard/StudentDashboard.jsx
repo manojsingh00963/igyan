@@ -154,11 +154,7 @@ const StudentDashboard = () => {
                     <p className="text-sm text-muted-foreground">Due: {task.due}</p>
                   </div>
                 ))}
-<<<<<<< HEAD
               </divContent>
-=======
-              </div>
->>>>>>> 19d426685f0a209379e25bbfab4df847958bb21d
             </div>
 
             {/* Quick Actions */}

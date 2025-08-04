@@ -177,7 +177,7 @@ const CourseModulePage = () => {
               setSelectedCourse(null);
               setSelectedSubdomain(null);
             }}
-            className={`flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 px-4 sm:px-6 py-3 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 ${isDarkMode
+            className={`flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 px-4 sm:px-6 py-3 rounded sm:rounded-2xl font-semibold transition-all duration-300 ${isDarkMode
                 ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700'
                 : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
               } shadow-lg hover:shadow-xl`}
@@ -239,7 +239,7 @@ const CourseModulePage = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <div className="flex items-center space-x-3 sm:space-x-4">
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${isDarkMode ? 'bg-gray-700' : 'bg-white'} flex items-center justify-center shadow-lg`}>
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded ${isDarkMode ? 'bg-gray-700' : 'bg-white'} flex items-center justify-center shadow-lg`}>
                   <Clock size={18} className={`${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                 </div>
                 <div>
@@ -248,7 +248,7 @@ const CourseModulePage = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-3 sm:space-x-4">
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${isDarkMode ? 'bg-gray-700' : 'bg-white'} flex items-center justify-center shadow-lg`}>
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded ${isDarkMode ? 'bg-gray-700' : 'bg-white'} flex items-center justify-center shadow-lg`}>
                   <Users size={18} className={`${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                 </div>
                 <div>
@@ -257,7 +257,7 @@ const CourseModulePage = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-3 sm:space-x-4 sm:col-span-2 lg:col-span-1">
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${isDarkMode ? 'bg-gray-700' : 'bg-white'} flex items-center justify-center shadow-lg`}>
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded ${isDarkMode ? 'bg-gray-700' : 'bg-white'} flex items-center justify-center shadow-lg`}>
                   <BookOpen size={18} className={`${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                 </div>
                 <div>
@@ -287,7 +287,7 @@ const CourseModulePage = () => {
               >
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
                   <div className="flex items-center space-x-4 sm:space-x-6">
-                    <div className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg ${getModuleProgress(course.id, module.id) === 100
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded sm:rounded-2xl flex items-center justify-center shadow-lg ${getModuleProgress(course.id, module.id) === 100
                         ? 'bg-gradient-to-br from-green-500 to-emerald-600'
                         : `bg-gradient-to-br ${domain.color}`
                       }`}>
@@ -321,7 +321,7 @@ const CourseModulePage = () => {
                         />
                       </div>
                     </div>
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'} flex items-center justify-center transition-all duration-300`}>
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded ${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'} flex items-center justify-center transition-all duration-300`}>
                       {expandedModules[module.id] ? (
                         <ChevronDown size={20} className={`${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                       ) : (
@@ -355,7 +355,7 @@ const CourseModulePage = () => {
                             >
                               {isCompleted && <CheckCircle size={16} />}
                             </button>
-                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg ${lesson.type === 'video'
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded flex items-center justify-center shadow-lg ${lesson.type === 'video'
                                 ? 'bg-gradient-to-br from-red-500 to-pink-600 text-white'
                                 : 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white'
                               }`}>
@@ -378,7 +378,7 @@ const CourseModulePage = () => {
                                 setSelectedModule(lesson.id);
                               }
                             }}
-                            className={`w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 text-sm sm:text-base ${lesson.type === 'video'
+                            className={`w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded sm:rounded-2xl font-semibold transition-all duration-300 text-sm sm:text-base ${lesson.type === 'video'
                                 ? 'bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-lg hover:shadow-xl'
                                 : 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg hover:shadow-xl'
                               }`}

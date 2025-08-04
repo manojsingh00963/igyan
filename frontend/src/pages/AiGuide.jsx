@@ -127,7 +127,7 @@ return (
               <button
                 key={index}
                 onClick={() => handleQuickAction(action)}
-                className={`w-full p-4 rounded-xl transition-all duration-300 text-left group hover:scale-[1.02] ${darkMode
+                className={`w-full p-4 rounded transition-all duration-300 text-left group hover:scale-[1.02] ${darkMode
                     ? 'bg-gray-700 hover:bg-gray-600 border border-gray-600'
                     : 'bg-gray-100 hover:bg-gray-100 border border-gray-200'
                   }`}
@@ -150,7 +150,7 @@ return (
           </div>
 
           {/* Trending Skills */}
-          <div className={`p-4 rounded-xl bg-blue-600 text-white mb-6`}>
+          <div className={`p-4 rounded bg-blue-600 text-white mb-6`}>
             <h3 className="font-bold mb-3 flex items-center">
               <Rocket className="mr-2" size={16} />
               Trending 2025
@@ -165,7 +165,7 @@ return (
           </div>
 
           {/* Stats */}
-          <div className={`p-4 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}>
+          <div className={`p-4 rounded ${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}>
             <h3 className={`font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
               AI Guide Impact
             </h3>

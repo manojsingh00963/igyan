@@ -145,21 +145,7 @@ const Mentor = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Link to="/" className="flex items-center space-x-2 text-blue-800 hover:text-blue-800-glow transition-colors">
-              <FaArrowLeft />
-              <span>Back to Home</span>
-            </Link>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-gradient">I-GYAN</div>
-            <div className="text-sm text-muted-foreground">👨‍🏫 Mentorship Hub</div>
-          </div>
-        </div>
-      </header>
+      
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-secondary relative overflow-hidden">
@@ -178,14 +164,14 @@ const Mentor = () => {
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-2 flex">
                 <button
                   onClick={() => setViewMode('find')}
-                  className={`px-6 py-3 rounded-xl transition-all ${viewMode === 'find' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
+                  className={`px-6 py-3 rounded transition-all ${viewMode === 'find' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
                     }`}
                 >
                   Find a Mentor
                 </button>
                 <button
                   onClick={() => setViewMode('apply')}
-                  className={`px-6 py-3 rounded-xl transition-all ${viewMode === 'apply' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
+                  className={`px-6 py-3 rounded transition-all ${viewMode === 'apply' ? 'bg-white text-blue-800 font-semibold' : 'text-white'
                     }`}
                 >
                   Become a Mentor
@@ -325,13 +311,13 @@ const Mentor = () => {
 
                       {/* Action Buttons */}
                       <div className="flex space-x-3">
-                        <button className="flex-1 bg-blue-700 text-white py-3 rounded-xl font-semibold hover:bg-blue-700-glow transition-colors">
+                        <button className="flex-1 bg-blue-700 text-white py-3 rounded font-semibold hover:bg-blue-700-glow transition-colors">
                           Book Session
                         </button>
-                        <button className="px-4 py-3 border border-border rounded-xl hover:border-blue-700 transition-colors">
+                        <button className="px-4 py-3 border border-border rounded hover:border-blue-700 transition-colors">
                           <FaComment />
                         </button>
-                        <button className="px-4 py-3 border border-border rounded-xl hover:border-blue-700 transition-colors">
+                        <button className="px-4 py-3 border border-border rounded hover:border-blue-700 transition-colors">
                           <FaHeart />
                         </button>
                       </div>
@@ -430,7 +416,7 @@ const Mentor = () => {
                           </li>
                         ))}
                       </ul>
-                      <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold hover:bg-blue-700-glow transition-colors">
+                      <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded font-semibold hover:bg-blue-700-glow transition-colors">
                         Get Started
                       </button>
                     </div>

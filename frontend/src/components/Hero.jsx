@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import { FaSearch, FaRobot } from "react-icons/fa";
-import CTASection from './CTAsection';
-import TestimonialSection from './Testinomials';
-import JourneySection from './JourneySection';
+import {  FaRobot } from "react-icons/fa";
+import { IoIosSend } from "react-icons/io"; 
 import bgimg from "../assets/hero-ai-learning-ByJUC3BB.jpg"
-import HowItWorks from './how-it-works';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineCalendar, AiOutlineFileText, AiOutlineUpload, AiOutlineUsergroupAdd } from "react-icons/ai";
+import { FeatureCards, JourneySection,  HowItWorks, CTASection, TestimonialSection, StatsGrid, ActionButtons } from './HeroSection/index';
 
 const features = [
     {
@@ -56,10 +54,12 @@ const Hero = ({ isLoggedIn }) => {
     const [chatInput, setChatInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [aiResponse, setAiResponse] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const onChatSubmit = (e) => {
         e.preventDefault();
         if (!chatInput.trim()) return;
+        setIsLoading(true);
 
         setIsTyping(true);
         setAiResponse('');
@@ -73,6 +73,7 @@ const Hero = ({ isLoggedIn }) => {
 
             setAiResponse(responses[Math.floor(Math.random() * responses.length)]);
             setIsTyping(false);
+            setIsLoading(false);
         }, 2000);
     };
 
@@ -102,12 +103,12 @@ const Hero = ({ isLoggedIn }) => {
 
                     {/* Main Heading */}
                     <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-2 sm:mb-4 leading-tight px-2 sm:px-0">
-                    <span className="block mb-2 sm:mb-0 sm:inline">Learn. Build. Get Hired.</span>
+                        <span className="block mb-2 sm:mb-0 sm:inline">Learn. Build. Get Hired.</span>
                     </h1>
                     <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight px-2 sm:px-0">
-                        
+
                         <span className="text-blue-600 dark:text-blue-400 block  typing-text"
-                         >
+                        >
                             Real Skills. Real Projects. Real Mentors.
                         </span>
                     </h1>
@@ -120,7 +121,7 @@ const Hero = ({ isLoggedIn }) => {
                     {/* Search Input */}
                     {/* AI Response */}
                     {(isTyping || aiResponse) && (
-                        <div className=" w-full my-4 mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border-l-4 border-blue-500">
+                        <div className=" w-full my-4 mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded border-l-4 border-blue-500">
                             {isTyping ? (
                                 <div className="flex items-center space-x-2">
                                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
@@ -131,21 +132,22 @@ const Hero = ({ isLoggedIn }) => {
                             )}
                         </div>
                     )}
-                    <div className="bg-white/50 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto mb-8 sm:mb-10 lg:mb-12 p-10 sm:px-0 rounded-xl shadow-md">
+                    <div className="bg-white/50 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto mb-8 sm:mb-10 lg:mb-12 p-10 sm:px-0 rounded shadow-md">
                         <form onSubmit={onChatSubmit} className="flex w-full items-center space-x-4">
-                            <div className="relative w-full">
+                            <div className="  relative w-[95%] mx-auto">
                                 <input
                                     type="text"
                                     value={chatInput}
                                     onChange={(e) => setChatInput(e.target.value)}
                                     placeholder="Hi there! What do you want to learn today?"
-                                    className="w-full mx-2 px-4 sm:px-5 lg:px-6 py-3 sm:py-4 text-sm sm:text-base lg:text-lg bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg sm:rounded-xl focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors shadow-lg pr-12 sm:pr-14"
+                                    className="w-full mx-2 px-4 sm:px-5 lg:px-6 py-3 sm:py-4 text-sm sm:text-base lg:text-lg bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg sm:rounded focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors shadow-lg pr-12 sm:pr-14"
                                 />
                                 <button
                                     type="submit"
                                     className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 sm:p-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-md sm:rounded-lg transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center"
                                 >
-                                    <FaSearch className="h-4 w-4 sm:h-5 sm:w-5" />
+                                    <IoIosSend className="h-4 w-4 sm:h-5 sm:w-5" />
+                                    <span>{isLoading ? 'Generating...' : 'Get AI Roadmap'}</span>
                                 </button>
                             </div>
                         </form>
@@ -157,47 +159,49 @@ const Hero = ({ isLoggedIn }) => {
 
 
                     {/* Action Buttons */}
-                    <div
+                    {/* <div
                         className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-14 lg:mb-16 px-2 sm:px-0">
                         <button
-                            onClick={handleCoursesClick} className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-3xl sm:rounded-xl font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 min-h-[48px] sm:min-h-[56px]">
-                            Courses Panel
+                        onClick={handleCoursesClick} className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-3xl sm:rounded font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 min-h-[48px] sm:min-h-[56px]">
+                        Courses Panel
                         </button>
-                        <button className="w-full sm:w-auto bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white border-2 border-gray-200 dark:border-gray-600 px-6 sm:px-8 py-3 sm:py-4 rounded-3xl sm:rounded-xl font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 min-h-[48px] sm:min-h-[56px]">
-                            Explore Projects
+                        <button className="w-full sm:w-auto bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white border-2 border-gray-200 dark:border-gray-600 px-6 sm:px-8 py-3 sm:py-4 rounded-3xl sm:rounded font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 min-h-[48px] sm:min-h-[56px]">
+                        Explore Projects
                         </button>
-                        <button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-3xl sm:rounded-xl font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 min-h-[48px] sm:min-h-[56px]">
-                            Mentor Feed
+                        <button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-3xl sm:rounded font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 min-h-[48px] sm:min-h-[56px]">
+                        Mentor Feed
                         </button>
-                    </div>
+                        </div> */}
 
                     {/* Stats Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto px-2 sm:px-0">
+                    {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto px-2 sm:px-0">
                         <div className="text-center p-4 sm:p-0">
-                            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-2">
-                                25Cr+
-                            </div>
-                            <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-tight">
-                                Learners in India
-                            </div>
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-2">
+                        25Cr+
+                        </div>
+                        <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-tight">
+                        Learners in India
+                        </div>
                         </div>
                         <div className="text-center p-4 sm:p-0">
-                            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 dark:text-green-400 mb-1 sm:mb-2">
-                                Real
-                            </div>
-                            <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-tight">
-                                Industry Projects
-                            </div>
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 dark:text-green-400 mb-1 sm:mb-2">
+                        Real
+                        </div>
+                        <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-tight">
+                        Industry Projects
+                        </div>
                         </div>
                         <div className="text-center p-4 sm:p-0 sm:col-span-1 col-span-1">
-                            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-600 dark:text-purple-400 mb-1 sm:mb-2">
-                                No Degree
-                            </div>
-                            <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-tight">
-                                Required
-                            </div>
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-600 dark:text-purple-400 mb-1 sm:mb-2">
+                        No Degree
                         </div>
-                    </div>
+                        <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-tight">
+                        Required
+                        </div>
+                        </div>
+                        </div> */}
+                <ActionButtons handleCoursesClick={handleCoursesClick}/>
+                    <StatsGrid/>
                 </div>
             </section>
 
@@ -206,9 +210,9 @@ const Hero = ({ isLoggedIn }) => {
             {/* Additional Sections */}
             <div className="relative z-10">
                 <HowItWorks />
-
+                <FeatureCards />
                 {/* Feature Cards */}
-                <section id="features" className="py-20 bg-gradient-to-b from-muted/20 to-background">
+                {/* <section id="features" className="py-20 bg-gradient-to-b from-muted/20 to-background">
                     <div className="container mx-auto px-4">
                         <div className="text-center mb-16">
                             <h2 className="text-4xl font-bold mb-4">Powerful AI Features</h2>
@@ -219,7 +223,7 @@ const Hero = ({ isLoggedIn }) => {
                             {features.map((feature, index) => (
                                 <div
                                     key={index}
-                                    className={`group p-6 border-2 rounded-xl bg-gradient-to-br ${feature.bgFrom} ${feature.bgTo} hover:shadow-xl transition-all duration-300 cursor-pointer`}
+                                    className={`group p-6 border-2 rounded bg-gradient-to-br ${feature.bgFrom} ${feature.bgTo} hover:shadow-xl transition-all duration-300 cursor-pointer`}
                                 >
                                     <div className={`w-12 h-12 rounded-lg ${feature.iconBg} flex items-center justify-center mb-4 ${feature.hoverBg} transition-colors`}>
                                         {feature.icon}
@@ -230,10 +234,10 @@ const Hero = ({ isLoggedIn }) => {
                             ))}
                         </div>
                     </div>
-                </section>
+                </section> */}
 
-                <JourneySection />
                 <CTASection />
+                <JourneySection />
                 <TestimonialSection />
             </div>
         </section>

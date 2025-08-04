@@ -128,7 +128,7 @@ const InputField = ({
           value={value}
           onChange={onChange}
           disabled={disabled}
-          className={`w-full pl-11 ${showPasswordToggle ? 'pr-11' : 'pr-4'} py-3 rounded-xl border transition-colors ${
+          className={`w-full pl-11 ${showPasswordToggle ? 'pr-11' : 'pr-4'} py-3 rounded border transition-colors ${
             error ? 'border-red-500 focus:border-red-500' : 'border-gray-200 dark:border-gray-600 focus:border-blue-500'
           } bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed`}
           placeholder={placeholder}
@@ -172,7 +172,7 @@ const UserTypeSelector = ({ userType, setUserType, disabled = false }) => {
             type="button"
             onClick={() => setUserType(value)}
             disabled={disabled}
-            className={`p-3 rounded-xl border transition-all text-left disabled:opacity-50 disabled:cursor-not-allowed ${
+            className={`p-3 rounded border transition-all text-left disabled:opacity-50 disabled:cursor-not-allowed ${
               userType === value
                 ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
                 : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
@@ -194,7 +194,7 @@ const SubmitButton = ({ isLoading, isSignUp }) => (
   <button
     type="submit"
     disabled={isLoading}
-    className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+    className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
   >
     {isLoading ? (
       <div className="flex items-center justify-center space-x-2">
@@ -293,7 +293,7 @@ const LoginModal = () => {
           </button>
           
           <div className="flex items-center space-x-3 mb-4">
-            <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-white/20 rounded flex items-center justify-center">
               <BookOpen size={20} />
             </div>
             <div>
@@ -355,7 +355,7 @@ const LoginModal = () => {
           />
 
           {errors.submit && (
-            <div className="p-3 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+            <div className="p-3 rounded bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <p className="text-red-600 dark:text-red-400 text-sm flex items-center space-x-2">
                 <span className="w-2 h-2 bg-red-500 rounded-full"></span>
                 <span>{errors.submit}</span>
