@@ -4,7 +4,7 @@ import CountUp from 'react-countup';
 import { Users, Code, Handshake, Briefcase } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 
-// Define the stats data in a clean, centralized array
+// Stats data array
 const statsData = [
   {
     icon: Users,
@@ -38,12 +38,7 @@ const statsData = [
 ];
 
 const StatsGrid = () => {
-  const { ref, inView } = useInView({
-    triggerOnce: true, // Only trigger the animation once
-    threshold: 0.5,    // Trigger when 50% of the component is visible
-  });
-
-  // Animation variants for the cards
+  // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -57,62 +52,55 @@ const StatsGrid = () => {
   };
 
   return (
-    <section className="  text-black">
+    <section className="text-black">
       <div className="container mx-auto px-4">
-        {/* Main Heading */}
-        {/* <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
-            Our Impact, by the Numbers
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-            See the scale of our community and the opportunities we create.
-          </p>
-        </div> */}
-
-        {/* Stats Grid */}
         <motion.div
-          ref={ref}
-          className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
           initial="hidden"
-          animate={inView ? "visible" : "hidden"}
+          animate="visible"
           variants={{
             visible: {
               transition: {
-                staggerChildren: 0.2,
+                staggerChildren: 0.2, // stagger animation
               },
             },
           }}
         >
-          {statsData.map((stat, index) => (
-            <motion.div
-              key={index}
-              className="text-center p-8  text-black rounded-xl  
-                         transition-transform duration-300 hover:scale-105 group"
-              variants={cardVariants}
-            >
-              <div
-                className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center
-                             ${stat.bgColor} ${stat.color} transition-colors duration-300 group-hover:bg-opacity-80`}
+          {statsData.map((stat, index) => {
+            const { ref, inView } = useInView({
+              triggerOnce: true,
+              threshold: 0.5,
+            });
+
+            return (
+              <motion.div
+                key={index}
+                ref={ref}
+                className="text-center p-8 text-black rounded-xl  
+                           transition-transform duration-300 hover:scale-105 group"
+                variants={cardVariants}
               >
-                <stat.icon size={32} />
-              </div>
-              <div className={` text-black text-2xl font-extrabold mb-1
-                               bg-clip-text text-transparent bg-gradient-to-r ${stat.color} to-current`}>
-                <CountUp
-                  start={0}
-                  end={stat.value}
-                  duration={2}
-                  separator=","
-                  suffix={stat.isPercentage ? "%" : "+"}
-                  enableScrollSpy={true} // Triggers the animation on scroll
-                  scrollSpyOnce={true}
-                />
-              </div>
-              <div className="text-sm md:text-base text-gray-900">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
+                <div
+                  className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center
+                               ${stat.bgColor} ${stat.color} transition-colors duration-300 group-hover:bg-opacity-80`}
+                >
+                  <stat.icon size={32} />
+                </div>
+                <div className="text-2xl font-extrabold mb-1">
+                  <CountUp
+                    start={0}
+                    end={inView ? stat.value : 0}
+                    duration={8}
+                    separator=","
+                    suffix={stat.isPercentage ? "%" : "+"}
+                  />
+                </div>
+                <div className="text-sm md:text-base text-gray-900">
+                  {stat.label}
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
