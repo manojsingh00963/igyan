@@ -14,7 +14,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello World! this is igayan.ai')
 });
 
 // Connect to MongoDB
